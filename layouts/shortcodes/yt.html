@@ -1,8 +1,5 @@
-<iframe width="640" height="320" 
-src="https://www.youtube-nocookie.com/embed/{{ .Get 0 }}"
-title="YouTube video player"
-frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-referrerpolicy="strict-origin-when-cross-origin"
-allowfullscreen>
-</iframe>
+{{ $ID := .Get 0 }}
+{{ $TITLE := .Get 1 }}
+<details ontoggle="load_yt(this)" class="yt-box" video_id="{{ $ID }}">
+    <summary><a href="https://youtu.be/{{ $ID }}" target="_blank">{{ or ($TITLE) (printf "https://youtu.be/%s" $ID) }}</a></summary>
+</details>

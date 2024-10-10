@@ -15,6 +15,7 @@ $paddig__table: 0.5em;
     border-radius: 6px;
     padding: 1.0em;
     background-color: $bg__box__01;
+    box-shadow: 0 0 4px 0 #80828560;
 }
 
 @mixin a__color__settings($color: #1feb8c) {
@@ -98,7 +99,6 @@ svg {
     vertical-align: middle;
 }
 
-
 .container {
 
     h1 {
@@ -116,8 +116,7 @@ svg {
 
     p {
         // margin: 1em 0;
-        line-height: 1.6em;
-        letter-spacing: 0.04em;
+        line-height: 1.6;
     }
 
     hr {
@@ -275,14 +274,13 @@ header {
                 }
 
                 li {
-                    margin: 2px 0px;
+                    padding: 2px 0px;
                 }
 
                 a {
                     display: block;
                     width: 100%;
                     padding: 2px;
-                    // line-height: 1;
                     color: $color__text__toc;
 
                     // *https://developer.mozilla.org/ja/docs/Web/CSS/:visited
@@ -362,6 +360,9 @@ main {
                             content: "»";
                             margin: 0 6px;
                         }
+                        &.active {
+                            display: none;
+                        }
                     }
                 }
             }
@@ -387,12 +388,12 @@ main {
     }
 
     img {
-        max-height: 50vh;
+        max-height: 48vh;
         margin: 1em 0;
     }
 
     figure {
-        margin: 1em 0;
+        margin: 2em 0;
         text-align: center;
         img {
             margin: 0 auto;
@@ -405,6 +406,7 @@ main {
     iframe {
         margin: 16px 0;
         max-width: 100%;
+        border: none;
     }
 
     ul {
@@ -456,23 +458,65 @@ main {
             background-color: $bg__code;
             border-radius: 4px;
             padding: 2px 8px;
-            font-size: 0.88em;
+            // font-size: 0.88em;
+        }
+    }
+
+    a.link_underline {
+        text-decoration: underline;
+    }
+
+    sup {
+        // vertical-align: inherit;
+        // font-size: inherit;
+        .footnote-ref {
+            &::before {
+                // content: "*";
+            }
         }
     }
 
     .footnotes {
         ol {
-            padding-left: 1.6em;
+            li {
+                &::marker {
+                    // content: "";
+                }
+            }
         }
 
         p {
-            margin: .5em;
+            line-height: 1;
         }
     }
 
     .input_volume {
         cursor: pointer;
         width: 50%;
+    }
+
+    .iframe-box {
+        iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+        }
+    }
+
+    .yt-box {
+        // text-align: center;
+        margin: 1em 0;
+        width: 100%;
+        button {
+            border: none;
+            background: none;
+            padding: 0;
+            img {
+                cursor: pointer;
+            }
+        }
+        iframe {
+            aspect-ratio: 16 / 9;
+        }
     }
 
     section {
@@ -584,9 +628,8 @@ footer {
     grid-area: footer;
 
     width: 100%;
-    padding: 12px 24px;
+    // padding: 12px 24px;
     background-color: $bg__box__01;
-
     text-align: center;
 
     a {
@@ -601,10 +644,11 @@ footer {
     }
 
     #footer-block {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
+        // display: flex;
+        // justify-content: space-between;
+        // align-items: baseline;
         // padding: 12px 20px;
+        margin: 2em 0;
     }
 }
 

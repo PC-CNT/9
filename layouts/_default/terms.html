@@ -1,13 +1,23 @@
+{{/*
+<!-- https://gohugo.io/templates/taxonomy/ -->
 {{ define "main" }}
-
 <h1>{{ .Title }}</h1>
-
 {{- $plural := .Data.Plural }}
 {{- range $index, $term := .Data.Terms.Alphabetical }}
 <section>
-    <a href="{{ $.Site.LanguagePrefix }}/{{ $plural }}/{{ $term.Name | urlize }}">{{ $term.Page.Title }}</a>
+    <a href="{{ $.Site.BaseURL }}{{ $plural }}/{{ $term.Name | urlize }}">{{ $term.Page.Title }}</a>
     ({{ $term.Count }})
 </section>
 {{- end }}
+{{ end }}
+*/}}
 
+
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ range .Data.Terms.ByCount }}
+<section>
+    <h2><a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a>({{ .Count }})</h2>
+</section>
+{{ end }}
 {{ end }}

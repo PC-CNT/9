@@ -10,16 +10,10 @@
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="{{ .Site.LanguageCode }}">
 
-{{- with .Params.Description -}}
+{{- with .Scratch.Get "DESCRIPTION" }}
 <meta name="description" content="{{ . }}">
 <meta property="og:description" content="{{ . }}">
-{{- else with .Summary -}}
-<meta name="description" content="{{ . | plainify }}">
-<meta property="og:description" content="{{ . | plainify }}">
-{{- else }}
-<meta name="description" content="{{ or .Site.Params.Description .Site.Title }}">
-<meta property="og:description" content="{{ or .Site.Params.Description .Site.Title }}">
-{{- end -}}
+{{ end -}}
 
 
 {{- if .IsHome -}}
@@ -34,10 +28,10 @@
 
 
 
-{{- if .Page.Resources.Get .Params.image -}}
+{{- with .Page.Resources.Get .Params.image -}}
 <meta property="og:image" content="{{ (.Resources.Get .Params.image).Permalink }}">
-{{ else if .Site.Params.favicon }}
-<meta property="og:image" content="{{ .Site.Params.favicon | absURL }}">
+{{ else with .Scratch.Get "FAVICON" }}
+<meta property="og:image" content="{{ . }}">
 {{- end }}
 
 
@@ -52,9 +46,9 @@
 
 <meta name="twitter:title" content="{{ $title }}">
 
-{{- with or .Description .Summary site.Params.description .Site.Title | plainify | htmlUnescape | chomp }}
+{{- with .Scratch.Get "DESCRIPTION" -}}
 <meta name="twitter:description" content="{{ . }}">
-{{- end }}
+{{- end -}}
 
 {{- $twitterSite := "" }}
 {{- with site.Params.social }}
@@ -70,18 +64,20 @@
 {{- end }}
 
 
-{{- if (or .Params.noindex ) }}
+{{- if (or .Site.Params.noindex .Params.noindex ) }}
 <meta name="robots" content="none" />
 {{ end -}}
 
+{{ if (or .Site.Params.nocomment .Params.nocomment) }}
 <meta name="Hatena::Bookmark" content="nocomment" />
+{{ end }}
 
 {{ range .AlternativeOutputFormats -}}
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ .Permalink | safeURL }}">
 {{ end -}}
 
 
-{{- with .Site.Params.favicon -}}
+{{- with .Scratch.Get "FAVICON" -}}
 {{ if eq ( path.Ext .) ".svg" }}
 <link rel="icon" type="image/svg+xml" href="{{ . }}">
 {{ else if ne ( path.Ext . ) ".ico" }}

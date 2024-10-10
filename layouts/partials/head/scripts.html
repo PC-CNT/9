@@ -26,7 +26,30 @@
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 {{ end -}}
 
-{{- if .Site.Params.norightclick -}}
+{{- if .HasShortcode "yt" }}
+<script>
+    function load_yt(details) {
+        if (details.open) {
+            let video_id = details.getAttribute("video_id");
+            let ytiframe = document.createElement("iframe");
+            ytiframe.src = `https://www.youtube.com/embed/${video_id}?modestbranding=1`;
+            ytiframe.width = "100%";
+            ytiframe.height = "auto";
+            ytiframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            ytiframe.allowFullscreen = true;
+            ytiframe.referrerpolicy="strict-origin-when-cross-origin";
+            details.appendChild(ytiframe);
+            return;
+        } else {
+            details.querySelector(`iframe`).remove();
+        }
+        
+    }
+
+</script>
+{{ end -}}
+
+{{- if (or .Site.Params.norightclick .Params.norightclick) -}}
 <script>
     document.addEventListener("contextmenu", function(event) {
         alert("右クリック禁止です！")

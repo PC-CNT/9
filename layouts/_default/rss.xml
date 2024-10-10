@@ -35,21 +35,24 @@
     xmlns:atom="http://www.w3.org/2005/Atom"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
-    xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:webfeeds="http://webfeeds.org/rss/1.0"
+    xmlns:wfw="http://wellformedweb.org/CommentAPI/">
     <channel>
         <title>{{ if eq .Title .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }} on
         {{ end }}{{ .Site.Title }}{{ end }}
         </title>
         <link>{{ .Permalink }}</link>
-        <description>Recent content {{ if ne .Title .Site.Title }}{{ with .Title }}in {{ . }} {{ end }}{{ end }}on {{ .Site.Title }}</description>
-        {{ with .Site.Params.favicon }}
+        <description>{{ $.Site.Params.description }}</description>
+        {{ with .Scratch.Get "FAVICON" }}
         <image>
-            <url>{{$.Site.BaseURL}}{{ . }}</url>
+            <url>{{ . }}</url>
             <title>{{ $.Site.Title }}</title>
             <link>{{ $.Site.BaseURL }}</link>
             <width>64</width>
             <height>64</height>
         </image>
+        <webfeeds:icon>{{ . }}</webfeeds:icon>
         {{ end }}
         <language>{{ site.Language.LanguageCode }}</language>
         {{ with $authorEmail }}

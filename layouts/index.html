@@ -2,7 +2,7 @@
 <div>
     {{ $paginator := .Paginate (where .Site.RegularPages.ByDate.Reverse "Params.hide" "!=" true) 10 }}
     {{ range $paginator.Pages }}
-        {{ partial "page_block" . }}
+        {{ partial "page_block.html" . }}
     {{ end }}
 </div>
 
