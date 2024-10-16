@@ -177,7 +177,7 @@
 
         <div class="pager">
             <div class="prev">
-                {{ with .PrevInSection }}
+                {{ with .Scratch.Get "PREVINSECTION" }}
                 <div>Prev</div>
                 <a href="{{ .RelPermalink }}">
                     <span>{{ .Title }}</span>
@@ -185,7 +185,7 @@
                 {{ end }}
             </div>
             <div class="next">
-                {{ with .NextInSection }}
+                {{ with .Scratch.Get "NEXTINSECTION" }}
                 <div>Next</div>
                 <a href="{{ .RelPermalink }}">
                     <span>{{ .Title }}</span>
