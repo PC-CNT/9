@@ -70,11 +70,13 @@
 {{- end }}
 
 
-{{- if (or .Params.noindex ) }}
+{{- if (or .Site.Params.noindex .Params.noindex ) }}
 <meta name="robots" content="none" />
 {{ end -}}
 
+{{ if (or .Site.Params.nocomment .Params.nocomment) }}
 <meta name="Hatena::Bookmark" content="nocomment" />
+{{ end }}
 
 {{ range .AlternativeOutputFormats -}}
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ .Permalink | safeURL }}">
