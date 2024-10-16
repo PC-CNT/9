@@ -362,6 +362,9 @@ main {
                             content: "»";
                             margin: 0 6px;
                         }
+                        &.active {
+                            display: none;
+                        }
                     }
                 }
             }
