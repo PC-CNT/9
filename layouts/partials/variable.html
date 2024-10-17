@@ -14,3 +14,8 @@
 {{ break }}
 {{ end }}
 {{ end }}
+
+
+{{- with .Site.Params.favicon }}
+{{ $.Scratch.Set "FAVICON" (. | absURL) }}
+{{ end -}}

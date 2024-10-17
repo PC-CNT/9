@@ -44,15 +44,15 @@
         </title>
         <link>{{ .Permalink }}</link>
         <description>{{ $.Site.Params.description }}</description>
-        {{ with .Site.Params.favicon }}
+        {{ with .Scratch.Get "FAVICON" }}
         <image>
-            <url>{{ urls.JoinPath $.Site.BaseURL . }}</url>
+            <url>{{ . }}</url>
             <title>{{ $.Site.Title }}</title>
             <link>{{ $.Site.BaseURL }}</link>
             <width>64</width>
             <height>64</height>
         </image>
-        <webfeeds:icon>{{ urls.JoinPath $.Site.BaseURL . }}</webfeeds:icon>
+        <webfeeds:icon>{{ . }}</webfeeds:icon>
         {{ end }}
         <language>{{ site.Language.LanguageCode }}</language>
         {{ with $authorEmail }}
