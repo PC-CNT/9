@@ -98,7 +98,6 @@ svg {
     vertical-align: middle;
 }
 
-
 .container {
 
     h1 {
@@ -476,6 +475,19 @@ main {
     .input_volume {
         cursor: pointer;
         width: 50%;
+    }
+
+    .yt-box {
+        text-align: center;
+        width: 100%;
+        button {
+            border: none;
+            background: none;
+            padding: 0;
+            img {
+                cursor: pointer;
+            }
+        }
     }
 
     section {
