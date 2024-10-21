@@ -28,23 +28,24 @@
 
 {{- if .HasShortcode "yt" }}
 <script>
-    function load_yt(button) {
-        let box = button.parentNode;
-        let video_id = box.getAttribute("video_id");
-        console.log(button)
-
-        let ytiframe = document.createElement("iframe");
-        ytiframe.src = `https://www.youtube.com/embed/${video_id}?modestbranding=1`;
-        ytiframe.width = "640";
-        ytiframe.height = "360";
-        ytiframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-        ytiframe.allowFullscreen = true;
-        ytiframe.referrerpolicy="strict-origin-when-cross-origin";
-        // button.style.display = "none";
-        button.remove();
-        box.appendChild(ytiframe);
-        return;
+    function load_yt(details) {
+        if (details.open) {
+            let video_id = details.getAttribute("video_id");
+            let ytiframe = document.createElement("iframe");
+            ytiframe.src = `https://www.youtube.com/embed/${video_id}?modestbranding=1`;
+            ytiframe.width = "640";
+            ytiframe.height = "360";
+            ytiframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            ytiframe.allowFullscreen = true;
+            ytiframe.referrerpolicy="strict-origin-when-cross-origin";
+            details.appendChild(ytiframe);
+            return;
+        } else {
+            details.querySelector(`iframe`).remove();
+        }
+        
     }
+
 </script>
 {{ end -}}
 
