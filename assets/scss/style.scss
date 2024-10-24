@@ -600,9 +600,8 @@ footer {
     grid-area: footer;
 
     width: 100%;
-    padding: 12px 24px;
+    // padding: 12px 24px;
     background-color: $bg__box__01;
-
     text-align: center;
 
     a {
@@ -617,10 +616,11 @@ footer {
     }
 
     #footer-block {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
+        // display: flex;
+        // justify-content: space-between;
+        // align-items: baseline;
         // padding: 12px 20px;
+        margin: 2em 0;
     }
 }
 
