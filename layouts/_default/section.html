@@ -1,0 +1,9 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+
+{{ range (where .RegularPagesRecursive "Params.hide" "!=" true) }}
+{{ partial "page_block.html" . }}
+{{ end }}
+
+{{ end }}

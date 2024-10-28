@@ -1,0 +1,58 @@
+<!-- https://github.com/gohugoio/hugo/issues/6296#issuecomment-1551789443 -->
+{{- if gt (.Description | len) 0 -}}
+{{- $.Store.Set "DESCRIPTION" (.Description | plainify | htmlUnescape | strings.TrimSpace) -}}
+{{- else if (and (findRE `<!--more-->` .RawContent) (compare.Gt (.Summary | len) 0)) -}}
+{{- $.Store.Set "DESCRIPTION" (.Summary | plainify | htmlUnescape | strings.TrimSpace) -}}
+{{- end -}}
+
+{{- if (not .Site.Params.disableAutoSummary) -}}
+{{- if (findRE `<!--more-->` .RawContent) -}}
+{{- $.Store.Set "SUMMARY" (.ContentWithoutSummary | plainify | htmlUnescape | strings.ReplaceRE `(\t|\n|\v|\f|\r)` ` ` | strings.TrimSpace | strings.Truncate 60) -}}
+{{- else -}}
+{{- $.Store.Set "SUMMARY" (.Summary | plainify | htmlUnescape | strings.ReplaceRE `(\t|\n|\v|\f|\r)` ` ` | strings.TrimSpace ) -}}
+{{- end -}}
+{{- end -}}
+
+
+{{- range (where .CurrentSection.RegularPages "Params.hide" "!=" true).ByDate.Reverse -}}
+{{- if (.Date.Before $.Date) -}}
+{{- $.Store.Set "PREVINCURRENTSECTION" . -}}
+{{- break -}}
+{{- end -}}
+{{- end -}}
+
+
+{{- range (where .CurrentSection.RegularPages "Params.hide" "!=" true).ByDate -}}
+{{- if (.Date.After $.Date) -}}
+{{- $.Store.Set "NEXTINCURRENTSECTION" . -}}
+{{- break -}}
+{{- end -}}
+{{- end -}}
+
+{{- range (where .FirstSection.RegularPagesRecursive "Params.hide" "!=" true).ByDate.Reverse -}}
+{{- if (.Date.Before $.Date) -}}
+{{- $.Store.Set "PREVINFIRSTSECTION" . -}}
+{{- break -}}
+{{- end -}}
+{{- end -}}
+
+
+{{- range (where .FirstSection.RegularPagesRecursive "Params.hide" "!=" true).ByDate -}}
+{{- if (.Date.After $.Date) -}}
+{{- $.Store.Set "NEXTINFIRSTSECTION" . -}}
+{{- break -}}
+{{- end -}}
+{{- end -}}
+
+{{- with (where (.Site.RegularPages.Related .) "Params.hide" "!=" true) -}}
+{{- $.Store.Set "RELATED" . -}}
+{{- end -}}
+
+{{- with .Site.Params.favicon -}}
+{{- $.Store.Set "FAVICON" (. | absURL) -}}
+{{- end -}}
+
+
+{{- with .Params.image -}}
+{{- $.Store.Set "THUMBNAIL" (urls.JoinPath $.RelPermalink .) -}}
+{{- end -}}

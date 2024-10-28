@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="{{ site.LanguageCode }}" dir="{{ or .Site.Language.LanguageDirection `ltr` }}">
-{{- partial "variable.html" . -}}
+{{- partial "variable/variable.html" . -}}
 <head>
     {{- partial "head/head.html" . -}}
     {{- partial "head/style.html" . -}}
-    {{- partial "head/scripts.html" . }}
+    {{- partial "head/scripts.html" . -}}
 </head>
 
 <body>
+    {{- if (and hugo.IsServer hugo.IsDevelopment) }}
+    <details open id="DEV" style="position: fixed; background-color: #30303080;">
+    <div>.Resources: {{- .Resources -}}</div>
+    <div>.Summary: {{- .Summary | plainify -}}</div>
+    <div>$SUMMARY: {{- $.Store.Get "SUMMARY" -}}</div>
+    <div>$DESCRIPTION: {{- $.Store.Get "DESCRIPTION" -}}</div>
+    <div>time.now: {{- time.Now -}}</div>
+    </details>
+    {{ end -}}
     <div id="content-wrapper">
         {{ partial "header/header.html" . }}
         <div class="container">

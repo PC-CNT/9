@@ -44,7 +44,7 @@
         </title>
         <link>{{ .Permalink }}</link>
         <description>{{ $.Site.Params.description }}</description>
-        {{ with .Scratch.Get "FAVICON" }}
+        {{ with .Store.Get "FAVICON" }}
         <image>
             <url>{{ . }}</url>
             <title>{{ $.Site.Title }}</title>
@@ -70,12 +70,16 @@
         {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
         {{- end }}
         {{- range $pages }}
+        {{/* rangeの中でvariable.htmlを読み込むのが重要 */}}
+        {{- partial "variable/variable.html" . -}}
         <item>
             <title>{{ .Title }}</title>
             <link>{{ .Permalink }}</link>
             <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
             {{- with $authorEmail }}
             <author>{{ . }}{{ with $authorName }} ({{ . }}){{ end }}</author>
+            {{ else with .Params.author }}
+            <author>{{ . }}</author>
             {{ end }}
             <guid>{{ .Permalink }}</guid>
             {{- with $authorName }}
@@ -84,15 +88,15 @@
             {{- range .GetTerms "tags" }}
             <category>{{ .LinkTitle | safeHTML }}</category>
             {{ end -}}
-            {{- with .Description }}
+            {{- with .Store.Get "DESCRIPTION" }}
             <description>
-                {{ . | chomp | transform.XMLEscape | safeHTML }}
+                {{- . | chomp | transform.XMLEscape | safeHTML -}}
             </description>
-            {{ end }}
+            {{ end -}}
             <content:encoded>
                 {{ `<![CDATA[` | safeHTML }}
                 {{ .Content }}
-                {{ `]]>` | safeHTML  }}
+                {{ `]]>` | safeHTML }}
             </content:encoded>
         </item>
                 {{- end }}

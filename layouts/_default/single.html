@@ -23,16 +23,8 @@
             <a href="{{ .Permalink }}" id="permalink">{{ .Title }}</a>
         </h1>
 
-        {{- with .GetTerms "tags" }}
-        <div class="tags">
-            {{ range . }}
-            <a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-            {{ end }}
-        </div>
-        {{ end -}}
-
-        <div style="text-align: right;">
-            <div>
+        <div class="times">
+            <span>
                 <time id="datePublished" itemprop="datePublished" datetime="{{ .Date.Format `2006-01-02T15:04:05+09:00` }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0z" fill="none" />
@@ -41,24 +33,41 @@
                     </svg>
                     {{- .Date | time.Format "2006-01-02" -}}
                 </time>
-            </div>
+            </span>
             {{- if lt .Date.Unix .Lastmod.Unix }}
-            <div>
+            <span>
                 <time id="dateModified" itemprop="dateModified" datetime="{{ .Lastmod.Format `2006-01-02T15:04:05+09:00` }}">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
                         <path fill="#fff" d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z" />
                     </svg>
                     {{- .Lastmod.Format "2006-01-02" -}}
                 </time>
-            </div>
+            </span>
             {{ end -}}
         </div>
+
+        {{- with .GetTerms "tags" }}
+        <div class="tags">
+            {{ range . }}
+            <a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            {{ end }}
+        </div>
+        {{ end -}}
+
+        {{- with $.Store.Get "DESCRIPTION" -}}
+        <div class="description">
+            {{ . }}
+        </div>
+        {{- end -}}
     </div>
     {{ end -}}
 
     <div id="content">
-        <!-- {{ (replace .Content .Summary "") | safeHTML }} -->
+        {{- if (findRE `<!--more-->` .RawContent) }}
         {{ .ContentWithoutSummary }}
+        {{ else }}
+        {{ .Content }}
+        {{ end -}}
     </div>
 
     {{- if not .Params.onlycontent }}
@@ -125,8 +134,9 @@
                 </a>
             </div>
             {{ end -}}
+            {{- if .Site.Params.Share.general }}
             <div>
-                <a href="javascript:void(0)" onclick="return false;" id="shareButton">
+                <a href="javascript:void(0)" onclick="return false;" id="shareButton" title="共有する">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -0.5 163 163">
                         <g>
                             <rect x="1" y="1" rx="8" ry="8" stroke="#000" stroke-width="2" pointer-events="all" />
@@ -136,6 +146,7 @@
                     </svg>
                 </a>
             </div>
+            {{ end -}}
             <script>
                 document.getElementById('shareButton').addEventListener('click', async () => {
                     try {
@@ -151,18 +162,18 @@
             </script>
         </div>
 
-        {{ with .Site.RegularPages.Related . | first 5 }}
+        {{- with $.Store.Get "RELATED" }}
         <div class="related">
             <h2>関連記事</h2>
             <ul>
-                {{ range . }}
+                {{- range first 5 . }}
                 <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
-                {{ end }}
+                {{ end -}}
             </ul>
         </div>
-        {{ end }}
+        {{ end -}}
 
-        {{ if .Site.Params.cusdis_id }}
+        {{- if .Site.Params.cusdis_id }}
         <div class="comment">
             <h2>コメント</h2>
             <div id="cusdis_thread" data-theme="dark" data-host="https://cusdis.com" data-app-id="{{ .Site.Params.cusdis_id }}" data-page-id="{{ .File.UniqueID }}" data-page-url="{{ .Permalink }}" data-page-title="{{ .Title }}"></div>
@@ -173,12 +184,12 @@
             <h2>コメント</h2>
             {{ template "_internal/disqus.html" . }}
         </div>
-        {{ end }}
+        {{ end -}}
 
         <div class="pager">
             <div class="prev">
                 <div>Prev</div>
-                {{ with .Scratch.Get "PREVINSECTION" }}
+                {{ with $.Store.Get "PREVINFIRSTSECTION" }}
                 <a href="{{ .RelPermalink }}">
                     <span>{{ .Title }}</span>
                 </a>
@@ -186,7 +197,7 @@
             </div>
             <div class="next">
                 <div>Next</div>
-                {{ with .Scratch.Get "NEXTINSECTION" }}
+                {{ with $.Store.Get "NEXTINFIRSTSECTION" }}
                 <a href="{{ .RelPermalink }}">
                     <span>{{ .Title }}</span>
                 </a>
@@ -195,7 +206,5 @@
         </div>
     </div>
     {{ end -}}
-
 </article>
-
 {{- end -}}

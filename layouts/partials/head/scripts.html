@@ -1,7 +1,7 @@
 <script src="/js/code.js" defer></script>
-{{ if .IsPage }}
+{{- if .IsPage }}
 <script src="/js/toc.js" defer></script>
-{{ end }}
+{{ end -}}
 {{- if .HasShortcode "soundcloud" }}
 <script>
     window.addEventListener("DOMContentLoaded", function() {
@@ -45,7 +45,6 @@
         }
         
     }
-
 </script>
 {{ end -}}
 

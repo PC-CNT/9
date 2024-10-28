@@ -10,7 +10,7 @@
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="{{ .Site.LanguageCode }}">
 
-{{- with .Scratch.Get "DESCRIPTION" }}
+{{- with or ($.Store.Get "DESCRIPTION") ($.Store.Get "SUMMARY") }}
 <meta name="description" content="{{ . }}">
 <meta property="og:description" content="{{ . }}">
 {{ end -}}
@@ -24,31 +24,27 @@
 {{- end -}}
 
 {{- $thumb := $.Params.image -}}
-<meta name="thumbnail" content="{{ $thumb }}">
-
-
+<!-- <meta name="thumbnail" content="{{ $thumb }}"> -->
 
 {{- with .Page.Resources.Get .Params.image -}}
 <meta property="og:image" content="{{ (.Resources.Get .Params.image).Permalink }}">
-{{ else with .Scratch.Get "FAVICON" }}
+{{ else with .Store.Get "FAVICON" }}
 <meta property="og:image" content="{{ . }}">
 {{- end }}
 
 
-{{- $images := partial "_funcs/get-page-images" . }}
-{{- with index $images 0 }}
+{{- $images := partial "_funcs/get-page-images" . -}}
+{{- with index $images 0 -}}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{{ .Permalink }}">
-{{- else }}
+{{ else }}
 <meta name="twitter:card" content="summary">
 {{- end }}
-
-
 <meta name="twitter:title" content="{{ $title }}">
 
-{{- with .Scratch.Get "DESCRIPTION" -}}
+{{- with or ($.Store.Get "DESCRIPTION") ($.Store.Get "SUMMARY") }}
 <meta name="twitter:description" content="{{ . }}">
-{{- end -}}
+{{ end -}}
 
 {{- $twitterSite := "" }}
 {{- with site.Params.social }}
@@ -57,32 +53,41 @@
 {{- $content := . }}
 {{- if not (strings.HasPrefix . "@") }}
 {{- $content = printf "@%v" . }}
-{{- end }}
+{{- end -}}
 <meta name="twitter:site" content="{{ $content }}">
-{{- end }}
-{{- end }}
-{{- end }}
+{{- end -}}
+{{- end -}}
+{{- end -}}
 
 
-{{- if (or .Site.Params.noindex .Params.noindex ) }}
+{{- if (or .Site.Params.noindex .Params.noindex .Params.hide (eq .Kind "taxonomy") (eq .Kind "term") (eq .Kind "section")) }}
 <meta name="robots" content="none" />
 {{ end -}}
 
-{{ if (or .Site.Params.nocomment .Params.nocomment) }}
+{{- if (or .Site.Params.nocomment .Params.nocomment) }}
 <meta name="Hatena::Bookmark" content="nocomment" />
-{{ end }}
-
-{{ range .AlternativeOutputFormats -}}
-<link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ .Permalink | safeURL }}">
 {{ end -}}
 
+{{- if (eq .Kind "page")}}
+<link rel="canonical" href="{{ .Permalink }}">
+{{ end -}}
 
-{{- with .Scratch.Get "FAVICON" -}}
-{{ if eq ( path.Ext .) ".svg" }}
+{{- range .AlternativeOutputFormats }}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ .Permalink | safeURL }}" title="{{ $title }}">
+{{ end -}}
+
+{{- if not .IsHome }}
+{{- with .Site.Home.OutputFormats.Get "rss" -}}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ .Permalink | safeURL }}" title="{{ $.Site.Title }}">
+{{- end -}}
+{{- end -}}
+
+{{- with $.Store.Get "FAVICON" -}}
+{{- if eq ( path.Ext .) ".svg" }}
 <link rel="icon" type="image/svg+xml" href="{{ . }}">
 {{ else if ne ( path.Ext . ) ".ico" }}
 <link rel="icon" type="image/{{ replace ( path.Ext . ) `.` `` }}" href="{{ . }}">
 {{ else }}
 <link rel="icon" type="image/x-icon" href="{{ . }}">
-{{ end }}
+{{ end -}}
 {{- end -}}

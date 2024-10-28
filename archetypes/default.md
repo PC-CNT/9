@@ -6,9 +6,8 @@ image: ""
 draft: true
 noindex: false
 hide: false
-tags: [
-    
-]
+categories: []
+tags: []
 build: {
     list: "always"
 }

@@ -1,30 +1,32 @@
-{{- partial "variable.html" . -}}
-<section>
-    {{- with .Params.image }}
-    <div>
-        <a href="{{ .RelPermalink }}">
-            <img src="{{ . }}" alt="">
-        </a>
-    </div>
-    {{ end -}}
-    <div class="section-date">
-        <time datetime="{{ .Date.Format `2006-01-02T15:04:05+09:00` }}">{{ .Date.Format "2006-01-02" }}</time>
-    </div>
-    <div class="section-title">
-        <h2>
-            <a href="{{ .RelPermalink }}">
-                {{ .LinkTitle }}
-            </a>
-        </h2>
-    </div>
-    <div class="tags">
-        {{- range .GetTerms "tags" }}
-        <a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle | safeHTML }}</a>
+{{- partial "variable/variable.html" . -}}
+<section class="section-flex">
+    <div class="section-content">
+        <div class="section-date">
+            <time datetime="{{ .Date.Format `2006-01-02T15:04:05+09:00` }}">{{ .Date.Format "2006-01-02" }}</time>
+        </div>
+        <div class="section-title">
+            <h2>
+                <a href="{{ .RelPermalink }}">
+                    {{ .LinkTitle }}
+                </a>
+            </h2>
+        </div>
+        <div class="tags">
+            {{- range .GetTerms "tags" }}
+            <a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle | safeHTML }}</a>
+            {{ end -}}
+        </div>
+        {{- with $.Store.Get "DESCRIPTION" }}
+        <div class="section-summary ">
+            {{ . }}
+        </div>
         {{ end -}}
     </div>
-    {{- with .Scratch.Get "DESCRIPTION" }}
-    <div class="section-summary ">
-        {{ . }}
+    {{- with $.Store.Get "THUMBNAIL" }}
+    <div class="section-thumbnail">
+        <a href="{{ $.RelPermalink }}">
+            <img src="{{ . }}" alt="">
+        </a>
     </div>
     {{ end -}}
 </section>

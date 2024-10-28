@@ -12,7 +12,9 @@
         {{ transform.Emojify (index $emojis .AlertType) }}
         {{ or (i18n .AlertType) (title .AlertType) }}
     </p>
-    {{ .Text | safeHTML }}
+    <span class="alert-content">
+        {{ .Text | safeHTML }}
+    </span>
 </blockquote>
 {{ else }}
 <blockquote>

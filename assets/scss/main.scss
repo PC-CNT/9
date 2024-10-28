@@ -9,22 +9,24 @@ $color__hr__border: #617781;
 $width__pc: 1160px;
 $paddig__table: 0.5em;
 
+$shadow: 0 0 4px 0 #80828560;
+
 @use "sass:color";
 
 @mixin box_rd_template {
     border-radius: 6px;
     padding: 1.0em;
     background-color: $bg__box__01;
-    box-shadow: 0 0 4px 0 #80828560;
+    box-shadow: $shadow;
 }
 
-@mixin a__color__settings($color: #1feb8c) {
+@mixin a__color__settings($color) {
     color: $color;
     &:link {
         color: $color;
     }
     &:visited {
-        $color_visited: color.adjust($color, $hue: -20, $saturation: -20%, $lightness: -20%);
+        $color_visited: color.adjust($color, $hue: -16, $saturation: -16%, $lightness: -16%);
         color: $color_visited;
         &:hover, &:active {
             color: color.scale($color_visited, $lightness: 50%);
@@ -51,7 +53,7 @@ $paddig__table: 0.5em;
 
 
 html {
-    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "HackGen Console NFJ" "源ノ角ゴシック Code JP", "Source Han Code JP", "system-ui";
+    font-family: "system-ui", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "HackGen Console NFJ", "源ノ角ゴシック Code JP", "Source Han Code JP",;
     // font-feature-settings: "palt"1;
     font-size: 1em;
     color: $text__for__darkmode;
@@ -76,7 +78,7 @@ a {
     text-decoration: none;
     word-wrap: break-word;
     // background-color: transparent;
-    @include a__color__settings();
+    @include a__color__settings(#1feb8c);
     &:hover {
         text-decoration: underline;
     }
@@ -96,7 +98,7 @@ img {
 svg {
     height: 1em;
     align-items: center;
-    vertical-align: middle;
+    vertical-align: bottom;
 }
 
 .container {
@@ -110,7 +112,9 @@ svg {
     h3,
     h4 {
         font-weight: bold;
-        margin-bottom: 1em;
+        // font-size: 1.5em;
+        // margin-bottom: 1em;
+        padding-bottom: 8px;
         border-bottom: 2px solid $color__hr__border;
     }
 
@@ -152,6 +156,7 @@ header {
     width: 100%;
     background-color: $bg__box__01;
     text-align: center;
+    box-shadow: $shadow;
 
     #title {
         margin: 0;
@@ -344,7 +349,9 @@ main {
 
     article {
         #before-content {
-            margin-bottom: 48px;
+            margin-bottom: 6em;
+            // padding-bottom: 1em;
+            // border-bottom: 1px solid #eee;
 
             nav.breadcrumb {
                 ul {
@@ -388,12 +395,12 @@ main {
     }
 
     img {
-        max-height: 48vh;
+        max-height: 64vh;
         margin: 1em 0;
     }
 
     figure {
-        margin: 2em 0;
+        margin: 1em 0;
         text-align: center;
         img {
             margin: 0 auto;
@@ -412,12 +419,16 @@ main {
     ul {
         margin: 1em 0;
         padding-left: 2em;
+        li {
+            // margin-bottom: 0.5em;
+        }
     }
 
     blockquote {
         margin: 16px 0;
-        padding: 0 1em;
-        border-left: .2em solid #ffffff;
+        padding: 0.5em 1em;
+        color: #a2a5a8;
+        border-left: .25em solid #70747a;
 
         $color__note: #4493f8;
         $color__tip: #3fb950;
@@ -427,9 +438,15 @@ main {
 
         .alert-heading {
             font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+            margin: 0 0 1em 0;
+        }
+
+        .alert-content > p {
+            margin: 0;
         }
 
         @mixin alert-color($color) {
+            color: inherit;
             border-color: $color;
             .alert-heading {
                 color: $color;
@@ -543,7 +560,7 @@ main {
         .section-title {
             h2 {
                 border-bottom: none;
-                margin: .5em 0;
+                margin: 1em 0;
             }
         }
 
@@ -557,8 +574,26 @@ main {
             }
         }
 
+        &.section-flex {
+            display: flex;
+        }
+
         .section-summary {
-            margin: 0;
+            margin: 0 0 1em 0;
+        }
+
+        .section-content {
+            flex-grow: 1;
+        }
+
+        .section-thumbnail {
+            flex-basis: 16%;
+            img {
+                margin: 0;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
         }
 
     }
@@ -575,8 +610,8 @@ main {
 
             >div {
                 svg {
-                    width: 32px;
-                    height: 32px;
+                    width: 36px;
+                    height: 36px;
                     transition: transform 0.3s ease;
 
                     &:hover {
@@ -603,21 +638,21 @@ main {
 
 
             .prev {
-                // flex-basis: 48%;
+                flex-basis: 50%;
                 margin-right: auto;
-                width: 50%;
-                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="165" viewBox="-0.5 -0.5 48 165"><path fill="none" stroke="%23ddd" stroke-miterlimit="1.42" stroke-width="2" d="M40.76 163.12.2 82 40.76.88m4.48 2.24L5.8 82l39.44 78.88m0-157.76" pointer-events="all"/></svg>') no-repeat center left;
-                padding: 0 1em 0 2em;
+                // width: 50%;
+                // background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="165" viewBox="-0.5 -0.5 48 165"><path fill="none" stroke="%23ddd" stroke-miterlimit="1.42" stroke-width="2" d="M40.76 163.12.2 82 40.76.88m4.48 2.24L5.8 82l39.44 78.88m0-157.76" pointer-events="all"/></svg>') no-repeat center left;
+                // padding: 0 1em 0 2em;
             }
 
             .next {
                 border-left: 1px solid #fff;
                 text-align: right;
-                // flex-basis: 48%;
+                flex-basis: 50%;
                 margin-left: auto;
-                width: 50%;
-                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="165" viewBox="-0.5 -0.5 48 165"><path fill="none" stroke="%23ddd" stroke-miterlimit="1.42" stroke-width="2" d="M.76 160.88 40.2 82 .76 3.12M5.24.88 45.8 82 5.24 163.12M5.24.88" pointer-events="all" /></svg>') no-repeat center right;
-                padding: 0 2em 0 1em;
+                // width: 50%;
+                // background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="165" viewBox="-0.5 -0.5 48 165"><path fill="none" stroke="%23ddd" stroke-miterlimit="1.42" stroke-width="2" d="M.76 160.88 40.2 82 .76 3.12M5.24.88 45.8 82 5.24 163.12M5.24.88" pointer-events="all" /></svg>') no-repeat center right;
+                // padding: 0 2em 0 1em;
             }
         }
     }
@@ -628,9 +663,9 @@ footer {
     grid-area: footer;
 
     width: 100%;
-    // padding: 12px 24px;
     background-color: $bg__box__01;
     text-align: center;
+    box-shadow: $shadow;
 
     a {
         color: inherit;
@@ -649,6 +684,9 @@ footer {
         // align-items: baseline;
         // padding: 12px 20px;
         margin: 2em 0;
+        a {
+            text-decoration: underline;
+        }
     }
 }
 
