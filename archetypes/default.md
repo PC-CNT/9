@@ -5,12 +5,8 @@ description: ""
 image: ""
 draft: true
 noindex: false
-hide: false
-categories: []
+hide: []
 tags: []
-build: {
-    list: "always"
-}
 ---
 
 <!--more-->

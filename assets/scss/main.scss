@@ -6,7 +6,7 @@ $bg__toc__focus: #434343;
 $text__for__darkmode: #f6f6f7;
 $bg__section__common: #303030;
 $color__hr__border: #617781;
-$width__pc: 1160px;
+$width__pc: 1024px;
 $paddig__table: 0.5em;
 
 $shadow: 0 0 4px 0 #80828560;
@@ -22,17 +22,23 @@ $shadow: 0 0 4px 0 #80828560;
 
 @mixin a__color__settings($color) {
     color: $color;
+
     &:link {
         color: $color;
     }
+
     &:visited {
         $color_visited: color.adjust($color, $hue: -16, $saturation: -16%, $lightness: -16%);
         color: $color_visited;
-        &:hover, &:active {
+
+        &:hover,
+        &:active {
             color: color.scale($color_visited, $lightness: 50%);
         }
     }
-    &:hover, &:active {
+
+    &:hover,
+    &:active {
         color: color.scale($color, $lightness: 50%);
     }
 }
@@ -53,9 +59,10 @@ $shadow: 0 0 4px 0 #80828560;
 
 
 html {
-    font-family: "system-ui", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "HackGen Console NFJ", "源ノ角ゴシック Code JP", "Source Han Code JP",;
+    font-family: "system-ui", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "HackGen Console NFJ", "源ノ角ゴシック Code JP", "Source Han Code JP", ;
     // font-feature-settings: "palt"1;
-    font-size: 1em;
+    // font-size: clamp(0.875rem, 0.818rem + 0.28vw, 1rem);
+    font-size: 1rem;
     color: $text__for__darkmode;
     -webkit-text-size-adjust: 100%;
 }
@@ -72,13 +79,17 @@ body {
     // min-height: 100vh;
     margin: 0;
     background-color: $bg__body;
+    word-wrap: break-word;
+    word-break: normal;
+    overflow-wrap: anywhere;
+    line-break: strict;
 }
 
 a {
     text-decoration: none;
-    word-wrap: break-word;
     // background-color: transparent;
     @include a__color__settings(#1feb8c);
+
     &:hover {
         text-decoration: underline;
     }
@@ -116,11 +127,6 @@ svg {
         // margin-bottom: 1em;
         padding-bottom: 8px;
         border-bottom: 2px solid $color__hr__border;
-    }
-
-    p {
-        // margin: 1em 0;
-        line-height: 1.6;
     }
 
     hr {
@@ -238,6 +244,7 @@ header {
         list-style: none;
         padding-left: 0;
         margin: 1.4em 0;
+
         li {
             // border-bottom: 1px #707070 solid;
             margin-bottom: 1em;
@@ -341,17 +348,22 @@ main {
             background-color: #333;
             border-radius: 4px;
             padding: 4px 6px;
-            &:link,&:visited {
+
+            &:link,
+            &:visited {
                 color: $text__for__darkmode;
             }
         }
     }
 
     article {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
         #before-content {
-            margin-bottom: 6em;
+            margin-bottom: 2em;
             // padding-bottom: 1em;
-            // border-bottom: 1px solid #eee;
+            border-bottom: 1px solid $color__hr__border;
 
             nav.breadcrumb {
                 ul {
@@ -359,25 +371,93 @@ main {
                     flex-wrap: wrap;
                     list-style: none;
                     padding: 0;
+
                     li {
                         // *https://zenn.dev/jiin/articles/370909a1c56f5a
                         display: flex;
+
                         &:not(:last-child)::after {
                             display: inline-block;
                             content: "»";
                             margin: 0 6px;
                         }
+
                         &.active {
                             display: none;
                         }
                     }
                 }
             }
+
+            .times {
+                margin: 1em 0;
+            }
         }
     }
 
     #content {
         min-height: 40vh;
+        line-height: 1.68;
+        padding: 2em 0;
+        flex-grow: 1;
+
+        p {
+            margin: 1em 0 1em 0;
+        }
+
+        blockquote {
+            margin: 2em 0;
+            padding: 0.5em 1em;
+            // color: #a2a5a8;
+            border-left: .25em solid #70747a;
+            background-color: color.scale(#70747a, $alpha: -80%);
+    
+            $color__note: #4493f8;
+            $color__tip: #3fb950;
+            $color__important: #ab7df8;
+            $color__warning: #d29922;
+            $color__caution: #f85149;
+    
+            .alert-heading {
+                font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+                margin: 0;
+            }
+    
+            .blockquote-text>p {
+                margin: 0;
+            }
+    
+            @mixin alert-color($color) {
+                color: inherit;
+                border-color: $color;
+                // background-color: transparentize(darken($color, 10%), 0.8);
+                background-color: color.scale($color, $alpha: -80%);
+    
+                .alert-heading {
+                    color: color.scale($color, $lightness: 10%);
+                }
+            }
+    
+            &.alert-note {
+                @include alert-color($color__note);
+            }
+    
+            &.alert-tip {
+                @include alert-color($color__tip);
+            }
+    
+            &.alert-important {
+                @include alert-color($color__important);
+            }
+    
+            &.alert-warning {
+                @include alert-color($color__warning);
+            }
+    
+            &.alert-caution {
+                @include alert-color($color__caution);
+            }
+        }
     }
 
     table {
@@ -395,16 +475,18 @@ main {
     }
 
     img {
-        max-height: 64vh;
+        max-height: 80vh;
         margin: 1em 0;
     }
 
     figure {
         margin: 1em 0;
         text-align: center;
+
         img {
             margin: 0 auto;
         }
+
         figcaption {
             margin-top: 1em;
         }
@@ -419,54 +501,9 @@ main {
     ul {
         margin: 1em 0;
         padding-left: 2em;
+
         li {
             // margin-bottom: 0.5em;
-        }
-    }
-
-    blockquote {
-        margin: 16px 0;
-        padding: 0.5em 1em;
-        color: #a2a5a8;
-        border-left: .25em solid #70747a;
-
-        $color__note: #4493f8;
-        $color__tip: #3fb950;
-        $color__important: #ab7df8;
-        $color__warning: #d29922;
-        $color__caution: #f85149;
-
-        .alert-heading {
-            font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-            margin: 0 0 1em 0;
-        }
-
-        .alert-content > p {
-            margin: 0;
-        }
-
-        @mixin alert-color($color) {
-            color: inherit;
-            border-color: $color;
-            .alert-heading {
-                color: $color;
-            }
-        }
-
-        &.alert-note {
-            @include alert-color($color__note);
-        }
-        &.alert-tip {
-            @include alert-color($color__tip);
-        }
-        &.alert-important {
-            @include alert-color($color__important);
-        }
-        &.alert-warning {
-            @include alert-color($color__warning);
-        }
-        &.alert-caution {
-            @include alert-color($color__caution);
         }
     }
 
@@ -484,11 +521,16 @@ main {
     }
 
     sup {
+
         // vertical-align: inherit;
         // font-size: inherit;
         .footnote-ref {
             &::before {
-                // content: "*";
+                content: "[";
+            }
+
+            &::after {
+                content: "]";
             }
         }
     }
@@ -509,7 +551,7 @@ main {
 
     .input_volume {
         cursor: pointer;
-        width: 50%;
+        width: 100%;
     }
 
     .iframe-box {
@@ -523,14 +565,17 @@ main {
         // text-align: center;
         margin: 1em 0;
         width: 100%;
+
         button {
             border: none;
             background: none;
             padding: 0;
+
             img {
                 cursor: pointer;
             }
         }
+
         iframe {
             aspect-ratio: 16 / 9;
         }
@@ -543,6 +588,13 @@ main {
         margin-bottom: 28px;
         border-radius: 6px;
 
+        &.section-flex {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            overflow: hidden;
+        }
+
         a {
             &:hover {
                 text-decoration: underline;
@@ -553,19 +605,37 @@ main {
             text-overflow: ellipsis;
             display: -webkit-box;
             overflow: hidden;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
+        }
+
+        .section-thumbnail {
+            // flex-basis: 16%;
+            flex-shrink: 0;
+
+            img {
+                margin: 0;
+                object-fit: cover;
+                width: 100%;
+                // height: 100%;
+                max-height: 20vh;
+            }
+        }
+
+        .section-content {
+            flex-grow: 1;
+            margin: 1em;
         }
 
         .section-title {
             h2 {
                 border-bottom: none;
-                margin: 1em 0;
+                margin: .5em 0;
+                padding: 0;
             }
         }
 
         .section-tags {
             margin: .5em 0;
+
             .section-tag {
                 padding: 4px 8px;
                 border-radius: 4px;
@@ -574,28 +644,9 @@ main {
             }
         }
 
-        &.section-flex {
-            display: flex;
-        }
-
         .section-summary {
             margin: 0 0 1em 0;
         }
-
-        .section-content {
-            flex-grow: 1;
-        }
-
-        .section-thumbnail {
-            flex-basis: 16%;
-            img {
-                margin: 0;
-                object-fit: cover;
-                width: 100%;
-                height: 100%;
-            }
-        }
-
     }
 
     #after-content {
@@ -610,8 +661,8 @@ main {
 
             >div {
                 svg {
-                    width: 36px;
-                    height: 36px;
+                    width: 1.5em;
+                    height: 1.5em;
                     transition: transform 0.3s ease;
 
                     &:hover {
@@ -684,6 +735,7 @@ footer {
         // align-items: baseline;
         // padding: 12px 20px;
         margin: 2em 0;
+
         a {
             text-decoration: underline;
         }
@@ -695,6 +747,7 @@ footer {
 .pagination {
     font-size: 1.2em;
     display: flex;
+    flex-wrap: wrap;
     padding-left: 0;
     margin: 24px 0;
     justify-content: center;
@@ -770,7 +823,6 @@ footer {
 
 .code_block {
     background-color: #282a36;
-    font-size: 0.92rem;
     margin: 24px 0;
     padding: 0.5em 1em;
     border-radius: 6px;

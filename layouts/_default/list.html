@@ -1,10 +1,10 @@
 {{ define "main" }}
 
 <h1>{{ .Title }}</h1>
-<!-- <h1>{{ .Section }}</h1> -->
 
-{{ range (where .Pages "Params.hide" "!=" true) }}
+{{ range (.Paginate (.Pages | collections.SymDiff (where .Pages "Params.hide" (slice "list" "all")))).Pages }}
 {{ partial "page_block.html" . }}
 {{ end }}
+{{ template "_internal/pagination.html" . }}
 
 {{ end }}

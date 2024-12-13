@@ -1,5 +1,12 @@
 {{- partial "variable/variable.html" . -}}
 <section class="section-flex">
+    {{- with $.Store.Get "THUMBNAIL" }}
+    <div class="section-thumbnail">
+        <a href="{{ $.RelPermalink }}">
+            <img src="{{ . }}" alt="">
+        </a>
+    </div>
+    {{ end -}}
     <div class="section-content">
         <div class="section-date">
             <time datetime="{{ .Date.Format `2006-01-02T15:04:05+09:00` }}">{{ .Date.Format "2006-01-02" }}</time>
@@ -16,17 +23,10 @@
             <a class="tag" href="{{ .RelPermalink }}">{{ .LinkTitle | safeHTML }}</a>
             {{ end -}}
         </div>
-        {{- with $.Store.Get "DESCRIPTION" }}
+        {{- with or ($.Store.Get "DESCRIPTION") ($.Store.Get "SUMMARY") }}
         <div class="section-summary ">
             {{ . }}
         </div>
         {{ end -}}
     </div>
-    {{- with $.Store.Get "THUMBNAIL" }}
-    <div class="section-thumbnail">
-        <a href="{{ $.RelPermalink }}">
-            <img src="{{ . }}" alt="">
-        </a>
-    </div>
-    {{ end -}}
 </section>

@@ -2,8 +2,9 @@
 
 <h1>{{ .Title }}</h1>
 
-{{ range (where .RegularPagesRecursive "Params.hide" "!=" true) }}
+{{ range (.Paginate (.RegularPagesRecursive | collections.SymDiff (where .RegularPagesRecursive "Params.hide" "intersect" (slice "section" "list" "all")))).Pages }}
 {{ partial "page_block.html" . }}
 {{ end }}
+{{ template "_internal/pagination.html" . }}
 
 {{ end }}

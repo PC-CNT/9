@@ -10,7 +10,7 @@
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="{{ .Site.LanguageCode }}">
 
-{{- with or ($.Store.Get "DESCRIPTION") ($.Store.Get "SUMMARY") }}
+{{- with or ($.Store.Get "DESCRIPTION") ($.Store.Get "SUMMARY") ($.Site.Params.description) }}
 <meta name="description" content="{{ . }}">
 <meta property="og:description" content="{{ . }}">
 {{ end -}}
@@ -23,23 +23,22 @@
 <meta property="article:section" content="{{ .Section }}">
 {{- end -}}
 
-{{- $thumb := $.Params.image -}}
-<!-- <meta name="thumbnail" content="{{ $thumb }}"> -->
-
-{{- with .Page.Resources.Get .Params.image -}}
-<meta property="og:image" content="{{ (.Resources.Get .Params.image).Permalink }}">
-{{ else with .Store.Get "FAVICON" }}
+{{- with .Store.Get "THUMBNAIL" -}}
 <meta property="og:image" content="{{ . }}">
-{{- end }}
+{{- else with .Store.Get "FAVICON" -}}
+<meta property="og:image" content="{{ . }}">
+{{- end -}}
 
-
-{{- $images := partial "_funcs/get-page-images" . -}}
-{{- with index $images 0 -}}
+{{- with .Store.Get "THUMBNAIL" -}}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{{ .Permalink }}">
-{{ else }}
+<meta name="twitter:image" content="{{ . }}">
+{{ else with .Store.Get "FAVICON" -}}
 <meta name="twitter:card" content="summary">
-{{- end }}
+<meta name="twitter:image" content="{{ . }}">
+{{- else -}}
+<meta name="twitter:card" content="summary">
+{{- end -}}
+
 <meta name="twitter:title" content="{{ $title }}">
 
 {{- with or ($.Store.Get "DESCRIPTION") ($.Store.Get "SUMMARY") }}

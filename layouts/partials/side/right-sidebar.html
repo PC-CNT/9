@@ -23,8 +23,9 @@
     <div id="Recent_Posts">
         <h2>最新記事</h2>
         <ul>
-            {{ range first 10 (where .Site.RegularPages.ByDate.Reverse "Params.hide" "!=" true) }}
+            {{ range first 10 (.Site.RegularPages | collections.SymDiff (where .Site.RegularPages.ByDate.Reverse "Params.hide" "intersect" (slice "list" "all"))) }}
             <li>
+                <div>{{ .Date | time.Format "2006-01-02" }}</div>
                 <a href="{{ .Permalink }}">
                     {{ .Name }}
                 </a>

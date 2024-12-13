@@ -22,9 +22,9 @@
 {{- if .IsHome }}{{ $pctx = .Site }}{{ end }}
 {{- $pages := slice }}
 {{- if or $.IsHome $.IsSection }}
-{{- $pages = (where $pctx.RegularPages "Params.hide" "!=" true ) }}
+{{- $pages = ($pctx.RegularPages | collections.SymDiff (where $pctx.RegularPages "Params.hide" "intersect" (slice "rss" "feed" "all"))) }}
 {{- else }}
-{{- $pages = $pctx.Pages }}
+{{- $pages = ($pctx.Pages | collections.SymDiff (where $pctx.Pages "intersect" (slice "rss" "feed" "all"))) }}
 {{- end }}
 {{- $limit := .Site.Config.Services.RSS.Limit }}
 {{- if ge $limit 1 }}

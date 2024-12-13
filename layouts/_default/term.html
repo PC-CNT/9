@@ -1,10 +1,10 @@
 {{ define "main" }}
 
 <h1>{{ .Title }}</h1>
-<!-- <h1>{{ .Section }}</h1> -->
 
-{{ range .Pages }}
+{{ range (.Paginate (.Pages | collections.SymDiff (where .Pages "Params.hide" "intersect" (slice .Data.Term .Data.Singular "term" "all")))).Pages }}
 {{ partial "page_block.html" . }}
 {{ end }}
+{{ template "_internal/pagination.html" . }}
 
 {{ end }}

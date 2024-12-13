@@ -9,12 +9,18 @@
 
 <body>
     {{- if (and hugo.IsServer hugo.IsDevelopment) }}
-    <details open id="DEV" style="position: fixed; background-color: #30303080;">
+    <details id="DEV" style="position: fixed; background-color: #30303080;">
     <div>.Resources: {{- .Resources -}}</div>
     <div>.Summary: {{- .Summary | plainify -}}</div>
     <div>$SUMMARY: {{- $.Store.Get "SUMMARY" -}}</div>
     <div>$DESCRIPTION: {{- $.Store.Get "DESCRIPTION" -}}</div>
+    <div>$THUMBNAIL: {{- $.Store.Get "THUMBNAIL" -}}</div>
     <div>time.now: {{- time.Now -}}</div>
+    <div>↓↓Params↓↓</div>
+    {{- range $name, $value := .Params -}}
+    <div>{{- $name -}}: {{- $value -}}</div>
+    {{- end -}}
+    <div>↑↑Params↑↑</div>
     </details>
     {{ end -}}
     <div id="content-wrapper">

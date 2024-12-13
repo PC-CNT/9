@@ -4,10 +4,22 @@
 {{ end -}}
 {{- if .HasShortcode "soundcloud" }}
 <script>
+    let api_src;
+</script>
+{{- if hugo.IsServer }}
+<script>
+    api_src = "/js/api.js";
+</script>
+{{ else }}
+<script>
+    api_src = `https://w.soundcloud.com/player/api.js`;
+</script>
+{{ end -}}
+<script>
     window.addEventListener("DOMContentLoaded", function() {
         let script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = "/js/api.js";
+        script.src = api_src;
         script.onload = function() {
             document.querySelectorAll(`.soundcloud`).forEach((c) => {
                 c.querySelector("input.input_volume").addEventListener("input", event => {
