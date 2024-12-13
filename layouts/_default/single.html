@@ -56,7 +56,9 @@
 
         {{- with $.Store.Get "DESCRIPTION" -}}
         <div class="description">
-            {{ . }}
+            <p>
+                {{ . }}
+            </p>
         </div>
         {{- end -}}
     </div>
