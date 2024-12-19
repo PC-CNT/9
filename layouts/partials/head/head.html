@@ -27,7 +27,7 @@
 <!-- <meta name="thumbnail" content="{{ $thumb }}"> -->
 
 {{- with .Page.Resources.Get .Params.image -}}
-<meta property="og:image" content="{{ (.Resources.Get .Params.image).Permalink }}">
+<meta property="og:image" content="{{ .Permalink }}">
 {{ else with .Store.Get "FAVICON" }}
 <meta property="og:image" content="{{ . }}">
 {{- end }}
