@@ -24,7 +24,7 @@
 {{- if or $.IsHome $.IsSection }}
 {{- $pages = (where $pctx.RegularPages "Params.hide" "!=" true ) }}
 {{- else }}
-{{- $pages = $pctx.Pages }}
+{{- $pages = (where $pctx.Pages "Params.hide" "!=" true ) }}
 {{- end }}
 {{- $limit := .Site.Config.Services.RSS.Limit }}
 {{- if ge $limit 1 }}
