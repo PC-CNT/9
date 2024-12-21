@@ -72,11 +72,14 @@ body {
     // min-height: 100vh;
     margin: 0;
     background-color: $bg__body;
+    word-wrap: break-word;
+    word-break: normal;
+    overflow-wrap: anywhere;
+    line-break: strict;
 }
 
 a {
     text-decoration: none;
-    word-wrap: break-word;
     // background-color: transparent;
     @include a__color__settings(#1feb8c);
     &:hover {
@@ -399,7 +402,7 @@ main {
     }
 
     img {
-        max-height: 64vh;
+        max-height: 50vh;
         margin: 1em 0;
     }
 
