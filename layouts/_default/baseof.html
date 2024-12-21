@@ -15,6 +15,11 @@
     <div>$SUMMARY: {{- $.Store.Get "SUMMARY" -}}</div>
     <div>$DESCRIPTION: {{- $.Store.Get "DESCRIPTION" -}}</div>
     <div>time.now: {{- time.Now -}}</div>
+    <div>↓↓Params↓↓</div>
+    {{- range $name, $value := .Params -}}
+    <div>{{- $name -}}: {{- $value -}}</div>
+    {{- end -}}
+    <div>↑↑Params↑↑</div>
     </details>
     {{ end -}}
     <div id="content-wrapper">
