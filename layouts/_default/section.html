@@ -2,7 +2,7 @@
 
 <h1>{{ .Title }}</h1>
 
-{{ range (where .RegularPagesRecursive "Params.hide" "!=" true) }}
+{{ range (.RegularPagesRecursive | collections.SymDiff (where .RegularPagesRecursive "Params.hide" "intersect" (slice "section" "list" "all"))) }}
 {{ partial "page_block.html" . }}
 {{ end }}
 

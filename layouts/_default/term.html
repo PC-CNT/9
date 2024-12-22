@@ -1,9 +1,8 @@
 {{ define "main" }}
 
 <h1>{{ .Title }}</h1>
-<!-- <h1>{{ .Section }}</h1> -->
 
-{{ range .Pages }}
+{{ range (.Pages | collections.SymDiff (where .Pages "Params.hide" "intersect" (slice .Data.Term .Data.Singular "term" "all"))) }}
 {{ partial "page_block.html" . }}
 {{ end }}
 

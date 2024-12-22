@@ -9,7 +9,7 @@
 
 <body>
     {{- if (and hugo.IsServer hugo.IsDevelopment) }}
-    <details open id="DEV" style="position: fixed; background-color: #30303080;">
+    <details id="DEV" style="position: fixed; background-color: #30303080;">
     <div>.Resources: {{- .Resources -}}</div>
     <div>.Summary: {{- .Summary | plainify -}}</div>
     <div>$SUMMARY: {{- $.Store.Get "SUMMARY" -}}</div>
