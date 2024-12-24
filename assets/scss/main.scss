@@ -583,6 +583,9 @@ main {
 
         &.section-flex {
             display: flex;
+            @media screen and (max-width: $width__pc) {
+                flex-direction: column;
+            }
         }
 
         .section-summary {
@@ -595,6 +598,9 @@ main {
 
         .section-thumbnail {
             flex-basis: 16%;
+            @media screen and (max-width: $width__pc ) {
+                // display: none;
+            }
             img {
                 margin: 0;
                 object-fit: cover;
