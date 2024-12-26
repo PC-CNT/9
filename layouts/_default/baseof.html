@@ -14,6 +14,7 @@
     <div>.Summary: {{- .Summary | plainify -}}</div>
     <div>$SUMMARY: {{- $.Store.Get "SUMMARY" -}}</div>
     <div>$DESCRIPTION: {{- $.Store.Get "DESCRIPTION" -}}</div>
+    <div>$THUMBNAIL: {{- $.Store.Get "THUMBNAIL" -}}</div>
     <div>time.now: {{- time.Now -}}</div>
     <div>↓↓Params↓↓</div>
     {{- range $name, $value := .Params -}}
