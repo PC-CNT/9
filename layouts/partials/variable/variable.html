@@ -55,7 +55,6 @@
 
 {{- with .Params.image -}}
 {{- $.Store.Set "THUMBNAIL" (urls.JoinPath $.RelPermalink .) -}}
+{{- else with (index (.Resources.ByType "image") 0) -}}
+{{- $.Store.Set "THUMBNAIL" .Permalink -}}
 {{- end -}}
-
-{{ $s := newScratch }}
-{{ $s.Set "greeting" "Hello" }}
