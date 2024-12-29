@@ -6,7 +6,7 @@ $bg__toc__focus: #434343;
 $text__for__darkmode: #f6f6f7;
 $bg__section__common: #303030;
 $color__hr__border: #617781;
-$width__pc: 1160px;
+$width__pc: 1024px;
 $paddig__table: 0.5em;
 
 $shadow: 0 0 4px 0 #80828560;
@@ -55,7 +55,7 @@ $shadow: 0 0 4px 0 #80828560;
 html {
     font-family: "system-ui", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "HackGen Console NFJ", "源ノ角ゴシック Code JP", "Source Han Code JP",;
     // font-feature-settings: "palt"1;
-    font-size: 1em;
+    font-size: clamp(0.875rem, 0.818rem + 0.28vw, 1rem);
     color: $text__for__darkmode;
     -webkit-text-size-adjust: 100%;
 }
@@ -550,6 +550,13 @@ main {
         margin-bottom: 28px;
         border-radius: 6px;
 
+        &.section-flex {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            overflow: hidden;
+        }
+
         a {
             &:hover {
                 text-decoration: underline;
@@ -560,14 +567,30 @@ main {
             text-overflow: ellipsis;
             display: -webkit-box;
             overflow: hidden;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
+        }
+
+        .section-thumbnail {
+            // flex-basis: 16%;
+            flex-shrink: 0;
+            img {
+                margin: 0;
+                object-fit: cover;
+                width: 100%;
+                // height: 100%;
+                max-height: 20vh;
+            }
+        }
+
+        .section-content {
+            flex-grow: 1;
+            margin: 1em;
         }
 
         .section-title {
             h2 {
                 border-bottom: none;
-                margin: 1em 0;
+                margin: .5em 0;
+                padding: 0;
             }
         }
 
@@ -581,34 +604,9 @@ main {
             }
         }
 
-        &.section-flex {
-            display: flex;
-            @media screen and (max-width: $width__pc) {
-                flex-direction: column;
-            }
-        }
-
         .section-summary {
             margin: 0 0 1em 0;
         }
-
-        .section-content {
-            flex-grow: 1;
-        }
-
-        .section-thumbnail {
-            flex-basis: 16%;
-            @media screen and (max-width: $width__pc ) {
-                // display: none;
-            }
-            img {
-                margin: 0;
-                object-fit: cover;
-                width: 100%;
-                max-height: 16vh;
-            }
-        }
-
     }
 
     #after-content {
@@ -708,6 +706,7 @@ footer {
 .pagination {
     font-size: 1.2em;
     display: flex;
+    flex-wrap: wrap;
     padding-left: 0;
     margin: 24px 0;
     justify-content: center;
@@ -783,7 +782,6 @@ footer {
 
 .code_block {
     background-color: #282a36;
-    font-size: 0.92rem;
     margin: 24px 0;
     padding: 0.5em 1em;
     border-radius: 6px;
