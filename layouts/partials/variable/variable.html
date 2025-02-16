@@ -2,7 +2,7 @@
 {{- if gt (.Description | len) 0 -}}
 {{- $.Store.Set "DESCRIPTION" (.Description | plainify | htmlUnescape | strings.TrimSpace) -}}
 {{- else if (and (findRE `<!--more-->` .RawContent) (compare.Gt (.Summary | len) 0)) -}}
-{{- $.Store.Set "DESCRIPTION" (.Summary | plainify | htmlUnescape | strings.TrimSpace) -}}
+{{- $.Store.Set "DESCRIPTION" (.Summary | markdownify) -}}
 {{- end -}}
 
 {{- if (not .Site.Params.disableAutoSummary) -}}
