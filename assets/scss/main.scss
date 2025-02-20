@@ -498,12 +498,17 @@ main {
         border: none;
     }
 
-    ul {
+    ul, ol {
         margin: 1em 0;
         padding-left: 2em;
+        ul, ol {
+            margin: 0;
+        }
 
         li {
-            // margin-bottom: 0.5em;
+            &+li {
+                margin-top: 0.5em;
+            }
         }
     }
 
