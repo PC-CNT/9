@@ -375,6 +375,7 @@ main {
                     li {
                         // *https://zenn.dev/jiin/articles/370909a1c56f5a
                         display: flex;
+                        margin: 0;
 
                         &:not(:last-child)::after {
                             display: inline-block;
