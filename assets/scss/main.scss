@@ -367,26 +367,28 @@ main {
 
             nav.breadcrumb {
                 ul {
-                    // display: flex;
-                    // flex-wrap: wrap;
+                    display: flex;
+                    flex-wrap: wrap;
                     list-style: none;
                     padding: 0;
 
                     li {
                         // *https://zenn.dev/jiin/articles/370909a1c56f5a
-                        // display: flex;
-                        display: inline;
+                        display: flex;
+                        // display: inline;
                         margin: 0;
 
                         &:not(:last-child)::after {
                             display: inline-block;
                             content: "»";
-                            // margin: 0 6px;
-                            margin: 0;
+                            margin: 0 0.5em;
+                            // margin: 0;
                         }
 
                         &.active {
-                            // display: none;
+                            span {
+                                display: none;
+                            }
                         }
                     }
                 }
