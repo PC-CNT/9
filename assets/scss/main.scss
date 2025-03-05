@@ -370,7 +370,7 @@ main {
                         // *https://zenn.dev/jiin/articles/370909a1c56f5a
                         display: flex;
                         // display: inline;
-                        margin: 0;
+                        margin: 0 ;
 
                         &:not(:last-child)::after {
                             display: inline-block;
@@ -506,7 +506,7 @@ main {
 
         li {
             &+li {
-                margin-top: 0em;
+                margin-top: 0.25em;
             }
         }
     }
