@@ -1,10 +1,10 @@
+{{- if .IsBlock -}}
 <figure>
-{{- if (urls.Parse .Destination).IsAbs -}}
-<img src="{{ (.Destination | safeURL) }}" {{- with .PlainText }} alt="{{ . }}" {{ end -}} loading="lazy">
-{{- else -}}
-<img src="{{ urls.JoinPath .Page.Permalink (.Destination | safeURL) }}" {{- with .PlainText }} alt="{{ . }}" {{ end -}} loading="lazy">
-{{ end -}}
-{{- with .Title -}}
-<figcaption>{{ . }}</figcaption>
-{{- end -}}
+    <img src="{{ .Destination | safeURL }}" {{- with .PlainText }} alt="{{ . }}" {{ end -}} loading="lazy">
+    {{- with .Title -}}
+    <figcaption>{{ . }}</figcaption>
+    {{- end -}}
 </figure>
+{{- else -}}
+<img src="{{ .Destination | safeURL }}" {{- with .PlainText }} alt="{{ . }}" {{ end -}} {{- with .Title }} title="{{ . }}" {{ end -}} loading="lazy">
+{{- end -}}
