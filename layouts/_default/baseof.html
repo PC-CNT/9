@@ -8,6 +8,13 @@
 </head>
 
 <body>
+    {{- if .Draft -}}
+    <style>
+        main {
+            border: 2px solid #87ceeb;
+        }
+    </style>
+    {{- end -}}
     {{- if (and hugo.IsServer hugo.IsDevelopment) }}
     <details id="DEV" style="position: fixed; background-color: #30303080;">
     <div>.Resources: {{- .Resources -}}</div>
