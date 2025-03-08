@@ -16,6 +16,9 @@
 {{ define "main" }}
 <h1>{{ .Title }}</h1>
 {{ range .Data.Terms.ByCount }}
+{{- if .Page.Params.hide -}}
+{{ continue }}
+{{ end }}
 <section>
     <h2><a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a>({{ .Count }})</h2>
 </section>
