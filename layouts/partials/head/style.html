@@ -1,12 +1,17 @@
 {{- with resources.Get "scss/main.scss" -}}
-{{- $opts := dict "transpiler" "dartsass" "targetPath" "css/style.css" -}}
+{{- $opts := dict
+    "transpiler" "dartsass"
+    "outputStyle" (cond hugo.IsProduction "compressed" "expanded")
+    "targetPath" "css/style.css"
+    "enableSourceMap" (not hugo.IsProduction)
+-}}
 {{- with . | toCSS $opts -}}
-{{- if hugo.IsDevelopment -}}
-<link rel="stylesheet" href="{{ .RelPermalink }}">
-{{- else -}}
-{{- with . | minify | fingerprint -}}
+{{ if hugo.IsProduction }}
+{{ with . | fingerprint }}
 <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
 {{ end }}
+{{ else }}
+<link rel="stylesheet" href="{{ .RelPermalink }}?v={{ time.Now.Unix }}">
 {{ end }}
 {{ end -}}
 {{ end -}}

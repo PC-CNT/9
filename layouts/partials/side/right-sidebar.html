@@ -13,7 +13,12 @@
         <ul>
             {{- range . }}
             <li>
+                {{- if eq .name "RSS" -}}
+                {{- $rss := $.Site.Home.OutputFormats.Get `rss` -}}
+                <a target="_blank" href="{{- $rss.Permalink | safeURL -}}">{{- .name -}}</a>
+                {{- else -}}
                 <a target="_blank" href="{{- .url -}}">{{- .name -}}</a>
+                {{- end -}}
             </li>
             {{ end -}}
         </ul>

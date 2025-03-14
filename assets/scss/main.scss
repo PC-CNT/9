@@ -15,7 +15,7 @@ $shadow: 0 0 4px 0 #80828560;
 
 @mixin box_rd_template {
     border-radius: 6px;
-    padding: 1.0em;
+    padding: 2.0em;
     background-color: $bg__box__01;
     box-shadow: $shadow;
 }
@@ -53,7 +53,7 @@ $shadow: 0 0 4px 0 #80828560;
 
 
 html {
-    font-family: "system-ui", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "HackGen Console NFJ", "源ノ角ゴシック Code JP", "Source Han Code JP", ;
+    font-family: "sans-serif",;
     // font-feature-settings: "palt"1;
     // font-size: clamp(0.875rem, 0.818rem + 0.28vw, 1rem);
     font-size: 1rem;
@@ -77,6 +77,8 @@ body {
     word-break: normal;
     overflow-wrap: anywhere;
     line-break: strict;
+    text-underline-offset: 0.25em;
+    line-height: 1.76;
 }
 
 a {
@@ -108,19 +110,41 @@ svg {
 
 .container {
 
-    h1 {
-        font-size: 2em;
-    }
-
     h1,
     h2,
     h3,
-    h4 {
+    h4,
+    h5,
+    h6 {
         font-weight: bold;
         // font-size: 1.5em;
         // margin-bottom: 1em;
         padding-bottom: 8px;
         border-bottom: 2px solid $color__hr__border;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    h3 {
+        font-size: 1.3em;
+    }
+
+    h4 {
+        font-size: 1.25em;
+    }
+
+    h5 {
+        font-size: 1.2em;
+    }
+
+    h6 {
+        font-size: 1.12em;
     }
 
     hr {
@@ -193,7 +217,7 @@ header {
         grid-template-areas:
             "main right_sidebar"
         ;
-        grid-template-columns: minmax(auto, 840px) 320px;
+        grid-template-columns: minmax(auto, 840px) 328px;
         grid-template-rows: 1fr;
         padding: 0 6vw;
         // place-content: center;
@@ -219,7 +243,7 @@ header {
     }
 
     main {
-        padding: 1em;
+        padding: 2em;
         border-radius: 6px;
         background-color: $bg__box__01;
     }
@@ -233,6 +257,7 @@ header {
 #right-sidebar {
     grid-area: right_sidebar;
     // font-size: 0.96em;
+    line-height: 1.4;
 
     ul {
         list-style: none;
@@ -264,13 +289,16 @@ header {
         @include box_rd_template();
         position: sticky;
         top: 24px;
+        max-height: 88vh;
+        overflow: auto;
 
         #TableOfContents {
-            overflow-y: auto;
-            max-height: 80vh;
+            // overflow-y: auto;
+            // max-height: 80vh;
 
             >ol {
                 padding: 0;
+                list-style-type: none;
 
                 ol {
                     list-style-type: none;
@@ -327,11 +355,21 @@ main {
 
     .heading {
         cursor: pointer;
+        position: relative;
 
-        a {
-            &:hover {
-                opacity: 0.8;
+        &:hover a.heading_permalink {
+            opacity: 1;
+        }
+
+        a.heading_permalink {
+            &::before {
+                content: "#";
             }
+            position: absolute;
+            left: 0;
+            margin-left: -0.8em;
+            opacity: 0;
+            transition: opacity 0.16s ease;
         }
     }
 
@@ -390,14 +428,16 @@ main {
 
             .times {
                 margin: 1em 0;
+                display: flex;
+                column-gap: 24px;
             }
         }
     }
 
     #content {
         min-height: 40vh;
-        line-height: 1.68;
-        padding: 2em 0;
+        // line-height: 1.72;
+        // padding: 2em 0;
         flex-grow: 1;
 
         p {
@@ -418,7 +458,7 @@ main {
             $color__caution: #f85149;
     
             .alert-heading {
-                font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+                font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
                 margin: 0;
             }
     
@@ -433,7 +473,7 @@ main {
                 background-color: color.scale($color, $alpha: -80%);
     
                 .alert-heading {
-                    color: color.scale($color, $lightness: 10%);
+                    color: color.change($color, $whiteness: 80%);
                 }
             }
     
@@ -474,7 +514,7 @@ main {
     }
 
     img {
-        max-height: 80vh;
+        // max-height: 80vh;
         margin: 1em 0;
     }
 
@@ -597,12 +637,6 @@ main {
             flex-direction: column;
             padding: 0;
             overflow: hidden;
-        }
-
-        a {
-            &:hover {
-                text-decoration: underline;
-            }
         }
 
         .summary {

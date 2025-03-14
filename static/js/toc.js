@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector(`article`)) {
         const options = {
             root: null,
-            rootMargin: "0px 0px -80% 0px",
+            rootMargin: "0px 0px -88% 0px",
             threshold: 0
         };
 
