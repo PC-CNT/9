@@ -53,7 +53,7 @@ $shadow: 0 0 4px 0 #80828560;
 
 
 html {
-    font-family: "sans-serif", "system-ui", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "HackGen Console NFJ", "源ノ角ゴシック Code JP", "Source Han Code JP", ;
+    font-family: "sans-serif",;
     // font-feature-settings: "palt"1;
     // font-size: clamp(0.875rem, 0.818rem + 0.28vw, 1rem);
     font-size: 1rem;
@@ -108,19 +108,29 @@ svg {
 
 .container {
 
-    h1 {
-        font-size: 2em;
-    }
-
     h1,
     h2,
     h3,
-    h4 {
+    h4,
+    h5,
+    h6 {
         font-weight: bold;
         // font-size: 1.5em;
         // margin-bottom: 1em;
         padding-bottom: 8px;
         border-bottom: 2px solid $color__hr__border;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    h3, h4, h5, h6 {
+        font-size: 1.25em;
     }
 
     hr {
