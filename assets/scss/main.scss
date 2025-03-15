@@ -412,6 +412,8 @@ main {
 
             .times {
                 margin: 1em 0;
+                display: flex;
+                column-gap: 24px;
             }
         }
     }
