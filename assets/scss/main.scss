@@ -458,7 +458,7 @@ main {
                 background-color: color.scale($color, $alpha: -80%);
     
                 .alert-heading {
-                    color: color.scale($color, $lightness: 10%);
+                    color: color.change($color, $whiteness: 80%);
                 }
             }
     
