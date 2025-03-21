@@ -24,19 +24,19 @@
         </h1>
 
         <div class="times">
-            <span>
-                投稿日
+            <div>
+                投稿日：
                 <time id="datePublished" itemprop="datePublished" datetime="{{ .Date.Format `2006-01-02T15:04:05+09:00` }}">
                     {{- .Date | time.Format "2006-01-02" -}}
                 </time>
-            </span>
+            </div>
             {{- if lt .Date.Unix .Lastmod.Unix }}
-            <span>
-                更新日
+            <div>
+                更新日：
                 <time id="dateModified" itemprop="dateModified" datetime="{{ .Lastmod.Format `2006-01-02T15:04:05+09:00` }}">
                     {{- .Lastmod.Format "2006-01-02" -}}
                 </time>
-            </span>
+            </div>
             {{ end -}}
         </div>
 
