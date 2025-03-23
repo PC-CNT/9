@@ -78,6 +78,7 @@ body {
     overflow-wrap: anywhere;
     line-break: strict;
     text-underline-offset: 0.25em;
+    line-height: 1.76;
 }
 
 a {
@@ -256,6 +257,7 @@ header {
 #right-sidebar {
     grid-area: right_sidebar;
     // font-size: 0.96em;
+    line-height: 1.4;
 
     ul {
         list-style: none;
@@ -421,7 +423,7 @@ main {
 
     #content {
         min-height: 40vh;
-        line-height: 1.72;
+        // line-height: 1.72;
         padding: 2em 0;
         flex-grow: 1;
 
