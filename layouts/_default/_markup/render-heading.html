@@ -1,4 +1,5 @@
 <h{{ .Level }} id="{{ .Anchor }}" class="heading">
-    <a href="#{{ .Anchor }}">{{ "#" | strings.Repeat .Level }}</a>
-    {{ .Text | safeHTML }}
+    <!-- <a class="heading_permalink" href="#{{ .Anchor }}">{{ "#" | strings.Repeat .Level }}</a> -->
+    <a class="heading_permalink" href="#{{ .Anchor }}"></a>
+    {{- .Text | safeHTML -}}
 </h{{ .Level }}>

@@ -353,7 +353,10 @@ main {
     .heading {
         cursor: pointer;
 
-        a {
+        a.heading_permalink {
+            &::before {
+                content: "#";
+            }
             &:hover {
                 opacity: 0.8;
             }
