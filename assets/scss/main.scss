@@ -15,7 +15,7 @@ $shadow: 0 0 4px 0 #80828560;
 
 @mixin box_rd_template {
     border-radius: 6px;
-    padding: 1.0em;
+    padding: 2.0em;
     background-color: $bg__box__01;
     box-shadow: $shadow;
 }
@@ -217,7 +217,7 @@ header {
         grid-template-areas:
             "main right_sidebar"
         ;
-        grid-template-columns: minmax(auto, 840px) 320px;
+        grid-template-columns: minmax(auto, 840px) 328px;
         grid-template-rows: 1fr;
         padding: 0 6vw;
         // place-content: center;
@@ -243,7 +243,7 @@ header {
     }
 
     main {
-        padding: 1em;
+        padding: 2em;
         border-radius: 6px;
         background-color: $bg__box__01;
     }
@@ -352,14 +352,21 @@ main {
 
     .heading {
         cursor: pointer;
+        position: relative;
+
+        &:hover a.heading_permalink {
+            opacity: 1;
+        }
 
         a.heading_permalink {
             &::before {
                 content: "#";
             }
-            &:hover {
-                opacity: 0.8;
-            }
+            position: absolute;
+            left: 0;
+            margin-left: -0.8em;
+            opacity: 0;
+            transition: opacity 0.16s ease;
         }
     }
 
