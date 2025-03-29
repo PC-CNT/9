@@ -289,13 +289,16 @@ header {
         @include box_rd_template();
         position: sticky;
         top: 24px;
+        max-height: 88vh;
+        overflow: auto;
 
         #TableOfContents {
-            overflow-y: auto;
-            max-height: 80vh;
+            // overflow-y: auto;
+            // max-height: 80vh;
 
             >ol {
                 padding: 0;
+                list-style-type: none;
 
                 ol {
                     list-style-type: none;
