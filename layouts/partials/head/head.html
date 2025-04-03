@@ -10,10 +10,15 @@
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="{{ .Site.LanguageCode }}">
 
-{{- with or ($.Store.Get "DESCRIPTION") ($.Store.Get "SUMMARY") ($.Site.Params.description) }}
+{{- if .IsHome -}}
+<meta name="description" content="{{- $.Site.Params.description -}}">
+<meta property="og:description" content="{{- $.Site.Params.description -}}">
+{{- else -}}
+{{- with or ($.Store.Get "DESCRIPTION") ($.Store.Get "SUMMARY") -}}
 <meta name="description" content="{{ . }}">
 <meta property="og:description" content="{{ . }}">
-{{ end -}}
+{{- end -}}
+{{- end -}}
 
 
 {{- if .IsHome -}}
