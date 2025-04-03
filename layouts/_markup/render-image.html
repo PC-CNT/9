@@ -1,0 +1,20 @@
+
+{{- $url := "" -}}
+{{- if (urls.Parse .Destination).IsAbs -}}
+{{- $url = (.Destination | safeURL) -}}
+{{- else -}}
+{{- with .Page.Resources.Get .Destination -}}
+{{- $url = .Permalink -}}
+{{- end -}}
+{{- end -}}
+
+{{- if .IsBlock -}}
+<figure>
+    <img src="{{ $url }}" {{- with .PlainText }} alt="{{ . }}" {{ end -}} loading="lazy">
+    {{- with .Title -}}
+    <figcaption>{{ . }}</figcaption>
+    {{- end -}}
+</figure>
+{{- else -}}
+<img src="{{ $url }}" {{- with .PlainText }} alt="{{ . }}" {{ end -}} {{- with .Title }} title="{{ . }}" {{ end -}} loading="lazy">
+{{- end -}}

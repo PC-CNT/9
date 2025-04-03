@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        document.querySelector(`article`).querySelectorAll(`.heading[id]`).forEach((cap) => {
+        document.querySelector(`article`).querySelectorAll(`.heading > [id]`).forEach((cap) => {
             observer.observe(cap);
         });
     }

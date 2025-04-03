@@ -9,11 +9,17 @@
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="{{ .Site.LanguageCode }}">
+<meta property="og:updated_time" content="{{ .Lastmod.Format `2006-01-02T15:04:05+09:00` }}">
 
-{{- with or ($.Store.Get "DESCRIPTION") ($.Store.Get "SUMMARY") ($.Site.Params.description) }}
+{{- if .IsHome -}}
+<meta name="description" content="{{- $.Site.Params.description -}}">
+<meta property="og:description" content="{{- $.Site.Params.description -}}">
+{{- else -}}
+{{- with or ($.Store.Get "DESCRIPTION") ($.Store.Get "SUMMARY") -}}
 <meta name="description" content="{{ . }}">
 <meta property="og:description" content="{{ . }}">
-{{ end -}}
+{{- end -}}
+{{- end -}}
 
 
 {{- if .IsHome -}}
@@ -62,6 +68,10 @@
 {{- if (or .Site.Params.noindex .Params.noindex .Params.hide (eq .Kind "taxonomy") (eq .Kind "term") (eq .Kind "section")) }}
 <meta name="robots" content="none" />
 {{ end -}}
+
+{{- with (or .Site.Params.hatena_id .Params.hatena_id) -}}
+<link rel="author" href="https://www.hatena.ne.jp/{{ . }}">
+{{- end -}}
 
 {{- if (or .Site.Params.nocomment .Params.nocomment) }}
 <meta name="Hatena::Bookmark" content="nocomment" />

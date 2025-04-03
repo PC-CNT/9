@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ site.LanguageCode }}" dir="{{ or .Site.Language.LanguageDirection `ltr` }}">
 {{- partial "variable/variable.html" . -}}
+
 <head>
     {{- partial "head/head.html" . -}}
     {{- partial "head/style.html" . -}}
@@ -17,17 +18,18 @@
     {{- end -}}
     {{- if (and hugo.IsServer hugo.IsDevelopment) }}
     <details id="DEV" style="position: fixed; background-color: #30303080;">
-    <div>.Resources: {{- .Resources -}}</div>
-    <div>.Summary: {{- .Summary | plainify -}}</div>
-    <div>$SUMMARY: {{- $.Store.Get "SUMMARY" -}}</div>
-    <div>$DESCRIPTION: {{- $.Store.Get "DESCRIPTION" -}}</div>
-    <div>$THUMBNAIL: {{- $.Store.Get "THUMBNAIL" -}}</div>
-    <div>time.now: {{- time.Now -}}</div>
-    <div>↓↓Params↓↓</div>
-    {{- range $name, $value := .Params -}}
-    <div>{{- $name -}}: {{- $value -}}</div>
-    {{- end -}}
-    <div>↑↑Params↑↑</div>
+        <div>{{- templates.Current -}}</div>
+        <div>.Resources: {{- .Resources -}}</div>
+        <div>.Summary: {{- .Summary | plainify -}}</div>
+        <div>$SUMMARY: {{- $.Store.Get "SUMMARY" -}}</div>
+        <div>$DESCRIPTION: {{- $.Store.Get "DESCRIPTION" -}}</div>
+        <div>$THUMBNAIL: {{- $.Store.Get "THUMBNAIL" -}}</div>
+        <div>time.now: {{- time.Now -}}</div>
+        <div>↓↓Params↓↓</div>
+        {{- range $name, $value := .Params -}}
+        <div>{{- $name -}}: {{- $value -}}</div>
+        {{- end -}}
+        <div>↑↑Params↑↑</div>
     </details>
     {{ end -}}
     <div id="content-wrapper">
@@ -38,7 +40,7 @@
             </main>
             {{- partial "side/right-sidebar.html" . -}}
         </div>
-        <footer>
+        <footer id="base-footer">
             {{ block "footer" . }}{{ partial "footer/footer.html" . }}{{ end }}
         </footer>
     </div>

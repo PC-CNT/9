@@ -1,0 +1,11 @@
+{{- define "main" -}}
+{{- /*
+    https://discourse.gohugo.io/t/negative-intersect-not-intersect-is-needed/13323/3
+*/ -}}
+{{ $paginator := .Paginate (.Site.RegularPages.ByDate.Reverse | collections.SymDiff (where .Site.RegularPages.ByDate.Reverse "Params.hide" "intersect" (slice "list" "all"))) }}
+{{ range $paginator.Pages }}
+    {{ partial "page_block.html" . }}
+{{ end }}
+
+{{ partial "pagination.html" . }}
+{{- end -}}

@@ -1,9 +1,13 @@
 {{- partial "variable/variable.html" . -}}
+{{- if .Draft -}}
+<section class="section-flex" style="border: 2px solid #0bc4a5;">
+{{- else -}}
 <section class="section-flex">
+{{- end -}}
     {{- with $.Store.Get "THUMBNAIL" }}
     <div class="section-thumbnail">
-        <a href="{{ $.RelPermalink }}">
-            <img src="{{ . }}" alt="">
+        <a href="{{ $.RelPermalink }}" title="{{ $.LinkTitle }}">
+            <img src="{{ . }}">
         </a>
     </div>
     {{ end -}}

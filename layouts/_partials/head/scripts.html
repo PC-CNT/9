@@ -1,6 +1,6 @@
-<script src="/js/code.js" defer></script>
+<script src="/js/code.js?v={{ time.Now.UnixMicro }}" defer></script>
 {{- if .IsPage }}
-<script src="/js/toc.js" defer></script>
+<script src="/js/toc.js?v={{ time.Now.UnixMicro }}" defer></script>
 {{ end -}}
 {{- if .HasShortcode "soundcloud" }}
 <script>
@@ -41,6 +41,9 @@
 {{- if .HasShortcode "yt" }}
 <script>
     function load_yt(details) {
+        if (details.classList.contains("loaded")) {
+            return
+        }
         if (details.open) {
             let video_id = details.getAttribute("video_id");
             let ytiframe = document.createElement("iframe");
@@ -51,10 +54,12 @@
             ytiframe.allowFullscreen = true;
             ytiframe.referrerpolicy="strict-origin-when-cross-origin";
             details.appendChild(ytiframe);
+            details.classList.add("loaded");
             return;
-        } else {
-            details.querySelector(`iframe`).remove();
         }
+        // } else {
+            // details.querySelector(`iframe`).remove();
+        // }
         
     }
 </script>

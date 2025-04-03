@@ -1,15 +1,19 @@
 <!-- https://github.com/gohugoio/hugo/issues/6296#issuecomment-1551789443 -->
-{{- if gt (.Description | len) 0 -}}
+{{- if eq .Description "false" -}}
+{{- $.Store.Set "DESCRIPTION" "" -}}
+{{- else if gt (.Description | len) 0 -}}
 {{- $.Store.Set "DESCRIPTION" (.Description | plainify | htmlUnescape | strings.TrimSpace) -}}
 {{- else if (and (findRE `<!--more-->` .RawContent) (compare.Gt (.Summary | len) 0)) -}}
 {{- $.Store.Set "DESCRIPTION" (.Summary | markdownify) -}}
 {{- end -}}
 
-{{- if (not .Site.Params.disableAutoSummary) -}}
-{{- if (findRE `<!--more-->` .RawContent) -}}
-{{- $.Store.Set "SUMMARY" (.ContentWithoutSummary | plainify | htmlUnescape | strings.ReplaceRE `(\t|\n|\v|\f|\r)` ` ` | strings.TrimSpace | strings.Truncate 160) -}}
-{{- else -}}
+
+{{- if (not (or .Params.disableAutoSummary .Site.Params.disableAutoSummary)) -}}
+{{- if (and (findRE `<!--more-->` .RawContent) (compare.Gt (.Summary | len) 0)) -}}
 {{- $.Store.Set "SUMMARY" (.Summary | plainify | htmlUnescape | strings.ReplaceRE `(\t|\n|\v|\f|\r)` ` ` | strings.TrimSpace ) -}}
+{{- else -}}
+{{- $.Store.Set "SUMMARY" (.ContentWithoutSummary | plainify | htmlUnescape | strings.ReplaceRE `(\t|\n|\v|\f|\r)` ` ` | strings.TrimSpace | strings.Truncate 160) -}}
+{{/*- $.Store.Set "SUMMARY" (.Summary | plainify | htmlUnescape | strings.ReplaceRE `(\t|\n|\v|\f|\r)` ` ` | strings.TrimSpace ) -*/}}
 {{- end -}}
 {{- end -}}
 
@@ -58,3 +62,8 @@
 {{- else with (index (.Resources.ByType "image") 0) -}}
 {{- $.Store.Set "THUMBNAIL" .Permalink -}}
 {{- end -}}
+
+
+{{- with .GitInfo -}}
+{{- $.Store.Set "AUTHOR" .AuthorName -}}
+{{ end }}

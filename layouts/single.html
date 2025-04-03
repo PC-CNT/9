@@ -1,8 +1,15 @@
 {{- define "main" -}}
 
-<article>
+<article itemscope itemtype="https://schema.org/BlogPosting">
+    {{- if (and hugo.IsServer hugo.IsDevelopment) }}
+    {{- with .File -}}
+    <div>
+        <a href="vscode-insiders://file/{{ .Filename | safeHTMLAttr }}" rel="nofollow">Open in VSCode</a>
+    </div>
+    {{- end -}}
+    {{- end -}}
     {{- if not .Params.onlycontent }}
-    <div id="before-content">
+    <header class="article-header">
         <nav aria-label="breadcrumb" class="breadcrumb">
             <ul itemscope itemtype="https://schema.org/BreadcrumbList">
                 {{ range $c, $p := .Ancestors.Reverse }}
@@ -19,7 +26,7 @@
             </ul>
         </nav>
 
-        <h1>
+        <h1 itemprop="headline">
             <a href="{{ .Permalink }}" id="permalink">{{ .Title }}</a>
         </h1>
 
@@ -55,7 +62,7 @@
             </p>
         </div>
         {{- end -}}
-    </div>
+    </header>
     {{ end -}}
 
     <div id="content">
@@ -67,7 +74,7 @@
     </div>
 
     {{- if not .Params.onlycontent }}
-    <div id="after-content">
+    <footer class="article-footer">
         <div class="box-share">
             {{- if .Site.Params.Share.Twitter }}
             <div>
@@ -199,29 +206,31 @@
         {{ else if .Site.Config.Services.Disqus.Shortname }}
         <div class="comment">
             <h2>コメント</h2>
-            {{ template "_internal/disqus.html" . }}
+            {{ partial "disqus.html" . }}
         </div>
         {{ end -}}
 
         <div class="pager">
-            <div class="prev">
-                <div>Prev</div>
-                {{ with $.Store.Get "PREVINFIRSTSECTION" }}
-                <a href="{{ .RelPermalink }}">
-                    <span>{{ .Title }}</span>
-                </a>
-                {{ end }}
-            </div>
+            {{ with $.Store.Get "NEXTINFIRSTSECTION" }}
             <div class="next">
-                <div>Next</div>
-                {{ with $.Store.Get "NEXTINFIRSTSECTION" }}
-                <a href="{{ .RelPermalink }}">
+                <h2>Next</h2>
+                <span>{{- .Date | time.Format "2006-01-02" -}}</span><br>
+                <a rel="next" href="{{ .RelPermalink }}">
                     <span>{{ .Title }}</span>
                 </a>
-                {{ end }}
             </div>
+            {{ end }}
+            {{ with $.Store.Get "PREVINFIRSTSECTION" }}
+            <div class="prev">
+                <h2>Prev</h2>
+                <span>{{- .Date | time.Format "2006-01-02" -}}</span><br>
+                <a rel="prev" href="{{ .RelPermalink }}">
+                    <span>{{ .Title }}</span>
+                </a>
+            </div>
+            {{ end }}
         </div>
-    </div>
+    </footer>
     {{ end -}}
 </article>
 {{- end -}}

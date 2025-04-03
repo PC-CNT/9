@@ -1,0 +1,7 @@
+<div class="heading">
+    <h{{ .Level }} id="{{ .Anchor }}" {{- with .Attributes.class }} class="{{ . }}" {{- end }}>
+        <!-- <a class="heading_permalink" href="#{{ .Anchor }}">{{ "#" | strings.Repeat .Level }}</a> -->
+        <a class="heading_permalink" href="#{{ .Anchor }}" aria-label="Permalink"></a>
+        {{- .Text -}}
+    </h{{ .Level }}>
+</div>

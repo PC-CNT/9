@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </svg>
         `
         copy_button.classList.add("code_copy_button")
+        copy_button.setAttribute("aria-label", "コードをコピー");
         copy_button.addEventListener("click", async () => {
             let _code = [...code_block.querySelectorAll(`code`)].pop().textContent;
             // console.log(_code)
