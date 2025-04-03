@@ -1,5 +1,5 @@
 <a class="link_underline" href="{{ .Destination | safeURL }}"
     {{- with .Title }} title="{{ . }}"{{ end -}}
-    {{- if (strings.HasPrefix .Destination "http") }} target="_blank" rel="noopener"{{ end -}}>
+    {{- if (strings.HasPrefix .Destination "http") }} target="_blank" rel="noopener external"{{ end -}}>
     {{- .Text | safeHTML -}}
 </a>

@@ -2,8 +2,8 @@
 <section class="section-flex">
     {{- with $.Store.Get "THUMBNAIL" }}
     <div class="section-thumbnail">
-        <a href="{{ $.RelPermalink }}">
-            <img src="{{ . }}" alt="">
+        <a href="{{ $.RelPermalink }}" title="{{ $.LinkTitle }}">
+            <img src="{{ . }}">
         </a>
     </div>
     {{ end -}}
