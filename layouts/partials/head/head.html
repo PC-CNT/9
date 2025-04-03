@@ -10,10 +10,15 @@
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:locale" content="{{ .Site.LanguageCode }}">
 
-{{- with or ($.Store.Get "DESCRIPTION") ($.Store.Get "SUMMARY") ($.Site.Params.description) }}
+{{- if .IsHome -}}
+<meta name="description" content="{{- $.Site.Params.description -}}">
+<meta property="og:description" content="{{- $.Site.Params.description -}}">
+{{- else -}}
+{{- with or ($.Store.Get "DESCRIPTION") ($.Store.Get "SUMMARY") -}}
 <meta name="description" content="{{ . }}">
 <meta property="og:description" content="{{ . }}">
-{{ end -}}
+{{- end -}}
+{{- end -}}
 
 
 {{- if .IsHome -}}
@@ -62,6 +67,10 @@
 {{- if (or .Site.Params.noindex .Params.noindex .Params.hide (eq .Kind "taxonomy") (eq .Kind "term") (eq .Kind "section")) }}
 <meta name="robots" content="none" />
 {{ end -}}
+
+{{- with (or .Site.Params.hatena_id .Params.hatena_id) -}}
+<link rel="author" href="https://www.hatena.ne.jp/{{ . }}">
+{{- end -}}
 
 {{- if (or .Site.Params.nocomment .Params.nocomment) }}
 <meta name="Hatena::Bookmark" content="nocomment" />

@@ -204,22 +204,24 @@
         {{ end -}}
 
         <div class="pager">
-            <div class="prev">
-                <div>Prev</div>
-                {{ with $.Store.Get "PREVINFIRSTSECTION" }}
-                <a href="{{ .RelPermalink }}">
-                    <span>{{ .Title }}</span>
-                </a>
-                {{ end }}
-            </div>
+            {{ with $.Store.Get "NEXTINFIRSTSECTION" }}
             <div class="next">
-                <div>Next</div>
-                {{ with $.Store.Get "NEXTINFIRSTSECTION" }}
+                <h2>Next</h2>
+                <span>{{- .Date | time.Format "2006-01-02" -}}</span><br>
                 <a href="{{ .RelPermalink }}">
                     <span>{{ .Title }}</span>
                 </a>
-                {{ end }}
             </div>
+            {{ end }}
+            {{ with $.Store.Get "PREVINFIRSTSECTION" }}
+            <div class="prev">
+                <h2>Prev</h2>
+                <span>{{- .Date | time.Format "2006-01-02" -}}</span><br>
+                <a href="{{ .RelPermalink }}">
+                    <span>{{ .Title }}</span>
+                </a>
+            </div>
+            {{ end }}
         </div>
     </div>
     {{ end -}}
