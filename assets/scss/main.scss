@@ -354,22 +354,13 @@ main {
 
 
     .heading {
-        cursor: pointer;
-        position: relative;
-
-        &:hover a.heading_permalink {
-            opacity: 1;
-        }
 
         a.heading_permalink {
+            cursor: pointer;
+            margin-right: 0.5em;
             &::before {
                 content: "#";
             }
-            position: absolute;
-            left: 0;
-            margin-left: -0.8em;
-            opacity: 0;
-            transition: opacity 0.16s ease;
         }
     }
 
