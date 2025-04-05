@@ -90,9 +90,9 @@ a {
     }
 }
 
-code {
-    font-family: "Consolas", "Cascadia Mono", "Monaco", "Courier New", "Segoe UI", monospace;
-}
+// code {
+    // font-family: "Consolas", "Cascadia Mono", "Monaco", "Courier New", "Segoe UI", monospace;
+// }
 
 
 //* ここ重要 テストに出る
@@ -846,9 +846,9 @@ footer {
 
 .code_block {
     background-color: #282a36;
-    margin: 24px 0;
+    // margin: 24px 0;
     padding: 0.5em 1em;
-    border-radius: 6px;
+    // border-radius: 6px;
     position: relative;
 
     .code-filename {
@@ -891,6 +891,7 @@ footer {
         }
 
         pre {
+            margin: 0;
             overflow-x: auto;
         }
     }
