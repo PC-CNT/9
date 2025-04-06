@@ -122,7 +122,7 @@ svg {
         font-weight: bold;
         // font-size: 1.5em;
         // margin-bottom: 1em;
-        padding-bottom: 8px;
+        // padding-bottom: 8px;
         border-bottom: 2px solid $color__hr__border;
     }
 
@@ -357,13 +357,30 @@ main {
 
 
     .heading {
-
         a.heading_permalink {
             cursor: pointer;
             margin-right: 0.5em;
-            &::before {
-                content: "#";
-            }
+            // &::before {
+            //     content: "#";
+            // }
+        }
+        h2, h3, h4, h5, h6 {
+            font-size: 1.5em;
+        }
+        h2 > a.heading_permalink::before {
+            content: "#";
+        }
+        h3 > a.heading_permalink::before {
+            content: "##";
+        }
+        h4 > a.heading_permalink::before {
+            content: "###";
+        }
+        h5 > a.heading_permalink::before {
+            content: "####";
+        }
+        h6 > a.heading_permalink::before {
+            content: "#####";
         }
     }
 

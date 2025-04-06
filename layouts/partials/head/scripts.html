@@ -1,6 +1,6 @@
-<script src="/js/code.js" defer></script>
+<script src="/js/code.js?v={{ time.Now.UnixMicro }}" defer></script>
 {{- if .IsPage }}
-<script src="/js/toc.js" defer></script>
+<script src="/js/toc.js?v={{ time.Now.UnixMicro }}" defer></script>
 {{ end -}}
 {{- if .HasShortcode "soundcloud" }}
 <script>
