@@ -1,9 +1,12 @@
 <!-- https://github.com/gohugoio/hugo/issues/6296#issuecomment-1551789443 -->
-{{- if gt (.Description | len) 0 -}}
+{{- if eq .Description "false" -}}
+{{- $.Store.Set "DESCRIPTION" "" -}}
+{{- else if gt (.Description | len) 0 -}}
 {{- $.Store.Set "DESCRIPTION" (.Description | plainify | htmlUnescape | strings.TrimSpace) -}}
 {{- else if (and (findRE `<!--more-->` .RawContent) (compare.Gt (.Summary | len) 0)) -}}
 {{- $.Store.Set "DESCRIPTION" (.Summary | markdownify) -}}
 {{- end -}}
+
 
 {{- if (not .Site.Params.disableAutoSummary) -}}
 {{- if (findRE `<!--more-->` .RawContent) -}}
