@@ -89,7 +89,7 @@ a {
 }
 
 // code {
-    // font-family: "Consolas", "Cascadia Mono", "Monaco", "Courier New", "Segoe UI", monospace;
+    // font-family: monospace, serif;
 // }
 
 
@@ -580,7 +580,6 @@ main {
             background-color: $bg__code;
             border-radius: 4px;
             padding: 4px 8px;
-            font-size: 0.96em;
             white-space: break-spaces;
             line-break: anywhere;
         }
