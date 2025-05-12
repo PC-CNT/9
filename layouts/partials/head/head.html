@@ -68,6 +68,10 @@
 <meta name="robots" content="none" />
 {{ end -}}
 
+{{- with (or .Site.Params.hatena_id .Params.hatena_id) -}}
+<link rel="author" href="https://www.hatena.ne.jp/{{ . }}">
+{{- end -}}
+
 {{- if (or .Site.Params.nocomment .Params.nocomment) }}
 <meta name="Hatena::Bookmark" content="nocomment" />
 {{ end -}}
