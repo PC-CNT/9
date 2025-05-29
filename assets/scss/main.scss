@@ -73,7 +73,8 @@ body {
     background-color: $bg__body;
     word-break: normal;
     overflow-wrap: anywhere;
-    line-break: anywhere;
+    // line-break: anywhere;
+    line-break: strict;
     text-underline-offset: 0.25em;
     line-height: 1.76;
 }
@@ -746,22 +747,22 @@ main {
 
         .pager {
             // margin-bottom: 4vh;
-            display: flex;
-            justify-content: space-between;
+            // display: flex;
+            // justify-content: space-between;
             border-bottom: 2px solid $color__hr__border;
             padding: 1em 0;
 
 
             .prev {
-                flex-basis: 50%;
-                margin-right: auto;
+                // flex-basis: 50%;
+                // margin-right: auto;
             }
 
             .next {
-                border-left: 1px solid #fff;
+                // border-left: 1px solid #fff;
                 text-align: right;
-                flex-basis: 50%;
-                margin-left: auto;
+                // flex-basis: 50%;
+                // margin-left: auto;
             }
         }
     }
