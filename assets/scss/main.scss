@@ -747,21 +747,22 @@ main {
 
         .pager {
             // margin-bottom: 4vh;
-            // display: flex;
-            // justify-content: space-between;
+            display: flex;
+            justify-content: space-between;
             border-bottom: 2px solid $color__hr__border;
             padding: 1em 0;
 
-
             .prev {
-                // flex-basis: 50%;
+                // margin: 1em 0;
+                flex-basis: 50%;
                 // margin-right: auto;
             }
 
             .next {
-                // border-left: 1px solid #fff;
+                // margin: 1em 0;
+                border-left: 1px solid #fff;
                 text-align: right;
-                // flex-basis: 50%;
+                flex-basis: 50%;
                 // margin-left: auto;
             }
         }
