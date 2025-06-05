@@ -491,7 +491,7 @@ main {
             @mixin alert-color($color) {
                 color: inherit;
                 border-color: $color;
-                // background-color: transparentize(darken($color, 10%), 0.8);
+                background-color: transparentize(darken($color, 20%), 0.92);
                 // background-color: color.scale($color, $alpha: -80%);
     
                 .alert-heading {
