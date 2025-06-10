@@ -1,6 +1,11 @@
 {{- define "main" -}}
 
 <article>
+    {{- if (and hugo.IsServer hugo.IsDevelopment) }}
+    {{- with .File -}}
+    <a href="vscode-insiders://file/{{ .Filename | safeHTMLAttr }}" rel="nofollow">Open in VSCode</a>
+    {{- end -}}
+    {{- end -}}
     {{- if not .Params.onlycontent }}
     <div id="before-content">
         <nav aria-label="breadcrumb" class="breadcrumb">
