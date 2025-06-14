@@ -3,7 +3,9 @@
 <article>
     {{- if (and hugo.IsServer hugo.IsDevelopment) }}
     {{- with .File -}}
-    <a href="vscode-insiders://file/{{ .Filename | safeHTMLAttr }}" rel="nofollow">Open in VSCode</a>
+    <div>
+        <a href="vscode-insiders://file/{{ .Filename | safeHTMLAttr }}" rel="nofollow">Open in VSCode</a>
+    </div>
     {{- end -}}
     {{- end -}}
     {{- if not .Params.onlycontent }}
