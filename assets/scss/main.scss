@@ -106,6 +106,16 @@ svg {
     vertical-align: bottom;
 }
 
+pre {
+    line-height: 1.44;
+}
+
+// *https://silight.hatenablog.jp/entry/2015/07/02/214601
+code {
+    font-family: monospace, serif;
+    font-size: 0.88em;
+}
+
 .serif {
     font-family: "游明朝", "Yu Mincho", "YuMincho", "Hiragino Mincho Pro", serif;
 }
@@ -580,7 +590,7 @@ main {
         >code {
             background-color: $bg__code;
             border-radius: 4px;
-            padding: 4px 8px;
+            padding: 4px 6px;
             white-space: break-spaces;
             line-break: anywhere;
         }
@@ -886,8 +896,8 @@ footer {
 
 .code_block {
     background-color: #282a36;
-    margin: 1em 0;
-    padding: 0.5em 1em;
+    // margin: 1em 0;
+    padding: 1em;
     // border-radius: 6px;
     position: relative;
 
