@@ -501,8 +501,10 @@ main {
             @mixin alert-color($color) {
                 color: inherit;
                 border-color: $color;
-                background-color: transparentize(darken($color, 20%), 0.92);
+                // https://sass-lang.com/documentation/modules/color/#darken
+                // background-color: transparentize(darken($color, 20%), 0.92);
                 // background-color: color.scale($color, $alpha: -80%);
+                background-color: color.scale(color.scale($color, $lightness: -20%), $alpha: -92%);
     
                 .alert-heading {
                     // color: color.change($color, $whiteness: 80%);
