@@ -18,6 +18,7 @@
     {{- end -}}
     {{- if (and hugo.IsServer hugo.IsDevelopment) }}
     <details id="DEV" style="position: fixed; background-color: #30303080;">
+        <div>{{- templates.Current -}}</div>
         <div>.Resources: {{- .Resources -}}</div>
         <div>.Summary: {{- .Summary | plainify -}}</div>
         <div>$SUMMARY: {{- $.Store.Get "SUMMARY" -}}</div>
