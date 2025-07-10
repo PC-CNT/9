@@ -9,6 +9,10 @@ params:
     noindex: false
     image: ""
     hide: []
+build:
+    list: always
+    publishResources: true
+    render: always
 ---
 
 <!--more-->
