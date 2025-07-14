@@ -62,3 +62,8 @@
 {{- else with (index (.Resources.ByType "image") 0) -}}
 {{- $.Store.Set "THUMBNAIL" .Permalink -}}
 {{- end -}}
+
+
+{{- with .GitInfo -}}
+{{- $.Store.Set "AUTHOR" .AuthorName -}}
+{{ end }}
