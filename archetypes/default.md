@@ -1,10 +1,10 @@
 ---
 title: {{ replace .Name "-" " " | title }}
 date: {{ .Date }}
+description: ""
 draft: true
 tags: []
 params:
-    description: ""
     disableAutoSummary: false
     noindex: false
     image: ""
