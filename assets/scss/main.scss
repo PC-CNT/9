@@ -382,19 +382,19 @@ main {
             margin: 1em 0;
         }
         h2 > a.heading_permalink::before {
-            content: "#";
-        }
-        h3 > a.heading_permalink::before {
             content: "##";
         }
-        h4 > a.heading_permalink::before {
+        h3 > a.heading_permalink::before {
             content: "###";
         }
-        h5 > a.heading_permalink::before {
+        h4 > a.heading_permalink::before {
             content: "####";
         }
-        h6 > a.heading_permalink::before {
+        h5 > a.heading_permalink::before {
             content: "#####";
+        }
+        h6 > a.heading_permalink::before {
+            content: "######";
         }
     }
 
