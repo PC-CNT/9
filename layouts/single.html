@@ -65,7 +65,7 @@
     </header>
     {{ end -}}
 
-    <div id="content">
+    <div class="article-contents">
         {{- if (findRE `<!--more-->` .RawContent) }}
         {{ .ContentWithoutSummary }}
         {{ else }}
