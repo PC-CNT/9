@@ -32,17 +32,17 @@
         <div>↑↑Params↑↑</div>
     </details>
     {{ end -}}
-    <div id="content-wrapper">
+    <div>
         {{ partial "header/header.html" . }}
-        <div class="container">
+        <div id="contents-wrapper">
             <main>
                 {{ block "main" . }}{{ end }}
             </main>
             {{- partial "side/right-sidebar.html" . -}}
         </div>
-        <footer id="base-footer">
-            {{ block "footer" . }}{{ partial "footer/footer.html" . }}{{ end }}
-        </footer>
+        {{- if .Site.Params.footer -}}
+        {{ block "footer" . }}{{ partial "footer/footer.html" . }}{{ end }}
+        {{- end -}}
     </div>
 </body>
 

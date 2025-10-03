@@ -7,6 +7,7 @@ $text__for__darkmode: #f6f6f7;
 $bg__section__common: #303030;
 $color__hr__border: #617781;
 $width__pc: 1024px;
+$width__mobile: calc($width__pc - 1px);
 $paddig__table: 0.5em;
 
 $shadow: 0 0 4px 0 #80828560;
@@ -124,8 +125,8 @@ code {
     text-align: center;
 }
 
-.container {
 
+#contents-wrapper {
     h1,
     h2,
     h3,
@@ -174,25 +175,19 @@ code {
         background-color: #30363d;
         border: 0;
     }
-}
 
-
-#content-wrapper {
     min-height: 100vh;
-    display: grid;
-    row-gap: 48px;
-    grid-template-areas:
-        "header"
-        "container"
-        "footer"
-    ;
-    grid-template-rows: auto 1fr auto;
-    grid-template-columns: 1fr;
+    margin: 12vh auto;
+    clear: both;
+    &::after {
+        content: "";
+        display: block;
+        clear: both;
+    }
 }
+
 
 header#base-header {
-    grid-area: header;
-
     width: 100%;
     background-color: $bg__box__01;
     text-align: center;
@@ -217,9 +212,6 @@ header#base-header {
 }
 
 
-.container {
-    grid-area: container;
-}
 
 //* https://note.com/takamoso/n/n82cdb89f024f
 //* https://zenn.dev/moneyforward/articles/css-grid-centering
@@ -227,35 +219,25 @@ header#base-header {
 
 //* PC用
 @media screen and (min-width: $width__pc) {
-    .container {
-        display: grid;
-        column-gap: calc((100vw - $width__pc) * 0.02 + 1vw);
-        grid-template-areas:
-            "main right_sidebar"
-        ;
-        grid-template-columns: minmax(auto, 840px) 340px;
-        grid-template-rows: 1fr;
-        padding: 0 6vw;
-        // place-content: center;
-        justify-content: center;
+    #contents-wrapper {
+        max-width: 1200px;
+        // width: 70%;
     }
 
     main {
         @include box_rd_template();
+
+        float: left;
+        // width: 60vw;
+        width: 70%;
     }
 }
 
 //* モバイル用
-@media screen and (max-width: $width__pc) {
-    .container {
-        display: grid;
-        grid-template-areas:
-            "main"
-        ;
-        grid-template-columns: minmax(auto, 840px);
-        grid-template-rows: 1fr;
-        justify-content: center;
-        padding: 0;
+@media screen and (max-width: $width__mobile) {
+    #contents-wrapper {
+        width: 96vw;
+        max-width: 800px;
     }
 
     main {
@@ -271,9 +253,12 @@ header#base-header {
 
 
 #right-sidebar {
-    grid-area: right_sidebar;
     // font-size: 0.96em;
     line-height: 1.4;
+
+    float: right;
+    // max-width: 24vw;
+    width: 28%;
 
     ul {
         list-style: none;
@@ -353,12 +338,8 @@ header#base-header {
 }
 
 main {
-    grid-area: main;
     //* https://stackoverflow.com/questions/53599625/css-grid-pre-horizontal-scroll 神の一手
     min-width: 0;
-
-    // display: grid;
-    // grid-template-columns: 100%;
 
     #permalink {
         color: #eee;
@@ -728,7 +709,7 @@ main {
         }
     }
 
-    footer#article-footer {
+    footer.article-footer {
         margin: 24px 0;
 
         .box-share {
@@ -786,13 +767,15 @@ main {
 }
 
 
-footer#base-footer {
-    grid-area: footer;
+footer.base-footer {
+    clear: both;
 
     width: 100%;
     background-color: $bg__box__01;
     text-align: center;
     box-shadow: $shadow;
+
+    padding: 24px 0;
 
     a {
         color: inherit;
@@ -805,12 +788,12 @@ footer#base-footer {
         }
     }
 
-    #footer-block {
+    .base-footer {
         // display: flex;
         // justify-content: space-between;
         // align-items: baseline;
         // padding: 12px 20px;
-        margin: 2em 0;
+        // margin: 2em 0;
 
         a {
             text-decoration: underline;
