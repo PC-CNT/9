@@ -157,7 +157,7 @@ SC.Widget = function(e) {
         if (("" === (i = e) || i && i.charCodeAt && i.substr) && (e = document.getElementById(e)), ! function(e) {
                 return !(!e || 1 !== e.nodeType || "IFRAME" !== e.nodeName.toUpperCase())
             }(e)) throw new Error("SC.Widget function should be given either iframe element or a string specifying id attribute of iframe element.");
-        t && (n = n || {}, e.src = O("http://wt.soundcloud.test:9200/", t, n));
+        t && (n = n || {}, e.src = O("https://wt.soundcloud.test:9200/", t, n));
         var u, a, c = g(v(e));
         return c && c.instance ? c.instance : (u = d.indexOf(v(e)) > -1, a = new r(e), f.push(new o(a, e, u)), a)
     }, i.Events = s, window.SC = window.SC || {}, window.SC.Widget = i, o = function(e, t, n) {
