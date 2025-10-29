@@ -100,3 +100,12 @@
 <link rel="icon" type="image/x-icon" href="{{ . }}">
 {{ end -}}
 {{- end -}}
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{{ .Site.Title }}",
+        "url": {{ absURL "" }}
+    }
+</script>
