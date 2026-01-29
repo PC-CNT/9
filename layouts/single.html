@@ -8,6 +8,9 @@
     </div>
     {{- end -}}
     {{- end -}}
+    {{- with .Store.Get "THUMBNAIL" -}}
+    <meta itemprop="image" content="{{ . }}">
+    {{- end }}
     {{- if not .Params.onlycontent }}
     <header class="article-header">
         <nav aria-label="breadcrumb" class="breadcrumb">
