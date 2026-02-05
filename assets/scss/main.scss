@@ -357,29 +357,29 @@ main {
         a.heading_permalink {
             cursor: pointer;
             margin-right: 0.5em;
-            &::before {
-                content: "#";
-            }
+            // &::before {
+            //     content: "#";
+            // }
         }
         h2, h3, h4, h5, h6 {
             font-size: 1.5em;
             margin: 1em 0;
         }
-        // h2 > a.heading_permalink::before {
-        //     content: "##";
-        // }
-        // h3 > a.heading_permalink::before {
-        //     content: "###";
-        // }
-        // h4 > a.heading_permalink::before {
-        //     content: "####";
-        // }
-        // h5 > a.heading_permalink::before {
-        //     content: "#####";
-        // }
-        // h6 > a.heading_permalink::before {
-        //     content: "######";
-        // }
+        h2 > a.heading_permalink::before {
+            content: "#";
+        }
+        h3 > a.heading_permalink::before {
+            content: "##";
+        }
+        h4 > a.heading_permalink::before {
+            content: "###";
+        }
+        h5 > a.heading_permalink::before {
+            content: "####";
+        }
+        h6 > a.heading_permalink::before {
+            content: "#####";
+        }
     }
 
     .tags {
