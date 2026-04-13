@@ -54,7 +54,7 @@
         </image>
         <webfeeds:icon>{{ . }}</webfeeds:icon>
         {{ end }}
-        <language>{{ site.Language.LanguageCode }}</language>
+        <language>{{ site.Language.Locale }}</language>
         {{ with $authorEmail }}
         <managingEditor>{{.}}{{ with $authorName }} ({{ . }}){{ end }}</managingEditor>
         {{ end }}
